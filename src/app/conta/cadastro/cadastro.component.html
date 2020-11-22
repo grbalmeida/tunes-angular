@@ -16,7 +16,7 @@
       <div class="form-group">
           <label class="col-md-2 control-label">E-mail</label>
           <div class="col-md-10">
-              <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)" formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }" />
+              <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)" formControl="email" [ngClass]="{'is-invalid': displayMessage.email }" />
               <span class="text-danger" *ngIf="displayMessage.email">
                 <p [innerHTML]="displayMessage.email"></p>
               </span>
@@ -26,7 +26,7 @@
       <div class="form-group">
           <label class="col-md-2 control-label">Senha</label>
           <div class="col-md-10">
-              <input class="form-control" id="senha" type="password" placeholder="Senha (requerido)" formControlName="senha" [ngClass]="{'is-invalid': displayMessage.senha }" />
+              <input class="form-control" id="senha" type="password" placeholder="Senha (requerido)" formControl="senha" [ngClass]="{'is-invalid': displayMessage.senha }" />
               <span class="text-danger" *ngIf="displayMessage.senha">
                 <p [innerHTML]="displayMessage.senha"></p>
               </span>
@@ -36,7 +36,7 @@
       <div class="form-group">
           <label class="col-md-2 control-label">Confirme a Senha</label>
           <div class="col-md-10">
-              <input class="form-control" id="confirmacaoSenha" type="password" placeholder="Confirme a Senha (requerido)" formControlName="confirmacaoSenha" [ngClass]="{'is-invalid': displayMessage.confirmacaoSenha }" />
+              <input class="form-control" id="confirmacaoSenha" type="password" placeholder="Confirme a Senha (requerido)" formControl="confirmacaoSenha" [ngClass]="{'is-invalid': displayMessage.confirmacaoSenha }" />
               <span class="text-danger" *ngIf="displayMessage.confirmacaoSenha">
                 <p [innerHTML]="displayMessage.confirmacaoSenha"></p>
               </span>

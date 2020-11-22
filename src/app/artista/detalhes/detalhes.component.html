@@ -1,0 +1,24 @@
+<div class="container main-container">
+  <h4>Excluir {{ artista.nome }} </h4>
+  <br>
+  <h5>Você tem certeza disso?</h5>
+
+  <div class="row">
+      <div class="col-md-6">
+          <dl>
+              <dt>
+                  Nome
+              </dt>
+              <dd>
+                  {{ artista.nome }}
+              </dd>
+          </dl>
+
+          <div>
+            <a class="btn btn-warning" [routerLink]="['/artistas/editar', artista.artistaId]">Editar</a>&nbsp;
+            <a class="btn btn-info" [routerLink]="['/artistas/listar-todos']">Voltar</a>
+          </div>
+      </div>
+  </div>
+
+</div>
