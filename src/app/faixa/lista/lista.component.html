@@ -1,0 +1,62 @@
+<div class="container main-container">
+
+  <h1>Lista de Faixas</h1>
+  <hr>
+
+  <p>
+      <a class="btn btn-info" [routerLink]="['/faixas/adicionar-novo']">Nova Faixa</a>
+  </p>
+
+  <table class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                Nome
+              </th>
+              <th>
+                Compositor
+              </th>
+              <th>
+                Álbum
+              </th>
+              <th>
+                Tipo de Mídia
+              </th>
+              <th>
+                Gênero
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let faixa of faixas">
+              <td>
+                {{ faixa.nome }}
+              </td>
+              <td>
+                {{ faixa.compositor }}
+              </td>
+              <td>
+                {{ faixa.album?.titulo }}
+              </td>
+              <td>
+                {{ faixa.tipoMidia.nome }}
+              </td>
+              <td>
+                {{ faixa.genero?.nome }}
+              </td>
+              <td class="text-right">
+                <a class="btn btn-warning" [routerLink]="['/faixas/detalhes', faixa.faixaId]">
+                  <span class="fa fa-search"></span>
+                </a>&nbsp;
+                <a class="btn btn-info" [routerLink]="['/faixas/editar', faixa.faixaId]">
+                  <span class="fa fa-pencil-alt"></span>
+                </a>&nbsp;
+                <a class="btn btn-danger" [routerLink]="['/faixas/excluir', faixa.faixaId]">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'albuns',
     loadChildren: () => import('./album/album.module').then(m => m.AlbumModule)
   },
+  {
+    path: 'faixas',
+    loadChildren: () => import('./faixa/faixa.module').then(m => m.FaixaModule)
+  },
 
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },

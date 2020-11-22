@@ -1,74 +1,80 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ArtistasResolve } from '../artista/services/artistas.resolve';
-import { AlbumAppComponent } from './album.app.component';
+import { AlbunsResolve } from '../album/services/albuns.resolve';
+import { GenerosResolve } from '../genero/services/generos.resolve';
+import { TiposDeMidiaResolve } from '../tipos-de-midia/services/tipos-de-midia';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { EditarComponent } from './editar/editar.component';
 import { ExcluirComponent } from './excluir/excluir.component';
+import { FaixaAppComponent } from './faixa.app.component';
 import { ListaComponent } from './lista/lista.component';
 import { NovoComponent } from './novo/novo.component';
-import { AlbumGuard } from './services/album.guard';
-import { AlbumResolve } from './services/album.resolve';
+import { FaixaGuard } from './services/faixa.guard';
+import { FaixaResolve } from './services/faixa.resolve';
 
 const albumRouterConfig: Routes = [
   {
-    path: '', component: AlbumAppComponent,
+    path: '', component: FaixaAppComponent,
     children: [
       { path: 'listar-todos', component: ListaComponent },
       {
         path: 'adicionar-novo',
         component: NovoComponent,
-        canDeactivate: [AlbumGuard],
-        canActivate: [AlbumGuard],
+        canDeactivate: [FaixaGuard],
+        canActivate: [FaixaGuard],
         data: [
           {
             claim: {
-              nome: 'Album',
+              nome: 'Faixa',
               valor: 'Adicionar'
             }
           }
         ],
         resolve: {
-          albuns: ArtistasResolve
+          albuns: AlbunsResolve,
+          tiposDeMidia: TiposDeMidiaResolve,
+          generos: GenerosResolve
         }
       }
     ]
   },
   {
     path: 'editar/:id', component: EditarComponent,
-    canActivate: [AlbumGuard],
+    canActivate: [FaixaGuard],
     data: [
       {
         claim: {
-          nome: 'Album',
+          nome: 'Faixa',
           valor: 'Atualizar'
         }
       }
     ],
     resolve: {
-      album: AlbumResolve,
-      artistas: ArtistasResolve
+      faixa: FaixaResolve,
+      albuns: AlbunsResolve,
+      tiposDeMidia: TiposDeMidiaResolve,
+      generos: GenerosResolve
     }
   },
   {
     path: 'detalhes/:id', component: DetalhesComponent,
     resolve: {
-      album: AlbumResolve
+      faixa: FaixaResolve
     }
   },
   {
     path: 'excluir/:id', component: ExcluirComponent,
-    canActivate: [AlbumGuard],
+    canActivate: [FaixaGuard],
     data: [
       {
         claim: {
-          nome: 'Album',
+          nome: 'Faixa',
           valor: 'Excluir'
         }
       }
     ],
     resolve: {
-      album: AlbumResolve
+      faixa: FaixaResolve
     }
   }
 ];
@@ -79,4 +85,4 @@ const albumRouterConfig: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AlbumRoutingModule { }
+export class FaixaRoutingModule { }

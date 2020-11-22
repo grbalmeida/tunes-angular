@@ -4,5 +4,4 @@ export interface Album {
   albumId: number;
   titulo: string;
   artista: Artista;
-  artistaId: number;
 }

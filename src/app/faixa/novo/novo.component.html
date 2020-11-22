@@ -1,0 +1,125 @@
+<div class="container main-container">
+
+  <h3>Nova Faixa</h3>
+
+  <hr>
+  <div class="row">
+      <div class="col-md-10">
+          <form enctype="multipart/form-data" (ngSubmit)="adicionarFaixa()" [formGroup]="faixaForm">
+
+              <div class="alert alert-danger" *ngIf="errors.length > 0">
+                  <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                  <ul>
+                      <li *ngFor="let error of errors">{{ error }}</li>
+                  </ul>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Nome</label>
+                <div>
+                  <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome" [ngClass]="{'is-invalid': displayMessage.nome }" />
+                  <span class="text-danger" *ngIf="displayMessage.nome">
+                    <p [innerHTML]="displayMessage.nome"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Compositor</label>
+                <div>
+                  <input class="form-control" id="compositor" type="text" placeholder="Compositor" formControlName="compositor" [ngClass]="{'is-invalid': displayMessage.compositor }" />
+                  <span class="text-danger" *ngIf="displayMessage.compositor">
+                    <p [innerHTML]="displayMessage.compositor"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Milissegundos</label>
+                <div>
+                  <input class="form-control" id="milissegundos" type="text" placeholder="Milissegundos" formControlName="milissegundos" [ngClass]="{'is-invalid': displayMessage.milissegundos }" />
+                  <span class="text-danger" *ngIf="displayMessage.milissegundos">
+                    <p [innerHTML]="displayMessage.milissegundos"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Bytes</label>
+                <div>
+                  <input class="form-control" id="bytes" type="text" placeholder="Bytes" formControlName="bytes" [ngClass]="{'is-invalid': displayMessage.bytes }" />
+                  <span class="text-danger" *ngIf="displayMessage.bytes">
+                    <p [innerHTML]="displayMessage.bytes"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Preço Unitário</label>
+                <div>
+                  <input class="form-control" id="precoUnitario" type="text" placeholder="Preço Unitário" formControlName="precoUnitario" [ngClass]="{'is-invalid': displayMessage.precoUnitario }" />
+                  <span class="text-danger" *ngIf="displayMessage.precoUnitario">
+                    <p [innerHTML]="displayMessage.precoUnitario"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Álbum</label>
+                <div>
+                  <select formControlName="albumId">
+                    <option
+                      *ngFor="let album of albuns"
+                      value="{{ album.albumId }}"
+                    >
+                      {{ album.titulo }}
+                    </option>
+                  </select>
+                  <span class="text-danger" *ngIf="displayMessage.albumId">
+                    <p [innerHTML]="displayMessage.albumId"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Tipo de Mídia</label>
+                <div>
+                  <select formControlName="tipoMidiaId">
+                    <option
+                      *ngFor="let tipoMidia of tiposDeMidia"
+                      value="{{ tipoMidia.tipoMidiaId }}"
+                    >
+                      {{ tipoMidia.nome }}
+                    </option>
+                  </select>
+                  <span class="text-danger" *ngIf="displayMessage.tipoMidiaId">
+                    <p [innerHTML]="displayMessage.tipoMidiaId"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Gênero</label>
+                <div>
+                  <select formControlName="generoId">
+                    <option
+                      *ngFor="let genero of generos"
+                      value="{{ genero.generoId }}"
+                    >
+                      {{ genero.nome }}
+                    </option>
+                  </select>
+                  <span class="text-danger" *ngIf="displayMessage.generoId">
+                    <p [innerHTML]="displayMessage.generoId"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <input type="submit" [disabled]="!faixaForm.valid" value="Cadastrar" class="btn btn-primary" id="cadastroFaixa">&nbsp;
+                  <a class="btn btn-info" [routerLink]="['/faixas/listar-todos']">Voltar</a>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

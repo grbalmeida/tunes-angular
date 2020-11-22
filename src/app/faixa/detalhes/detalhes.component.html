@@ -1,0 +1,66 @@
+<div class="container main-container">
+  <h4>Excluir {{ faixa.nome }} </h4>
+  <br>
+  <h5>Você tem certeza disso?</h5>
+
+  <div class="row">
+      <div class="col-md-6">
+          <dl>
+            <dt>
+              Nome
+            </dt>
+            <dd>
+              {{ faixa.nome }}
+            </dd>
+            <dt>
+              Compositor
+            </dt>
+            <dd>
+              {{ faixa.compositor }}
+            </dd>
+            <dt>
+              Álbum
+            </dt>
+            <dd>
+              {{ faixa.album?.titulo }}
+            </dd>
+            <dt>
+              Tipo de Mídia
+            </dt>
+            <dd>
+              {{ faixa.tipoMidia.nome }}
+            </dd>
+            <dt>
+              Gênero
+            </dt>
+            <dd>
+              {{ faixa.genero?.nome }}
+            </dd>
+            <dt>
+              Milissegundos
+            </dt>
+            <dd>
+              {{ faixa.milissegundos }}
+            </dd>
+            <dt>
+              Bytes
+            </dt>
+            <dd>
+              {{ faixa.bytes }}
+            </dd>
+            <dt>
+              Preço Unitário
+            </dt>
+            <dd>
+              {{ faixa.precoUnitario }}
+            </dd>
+          </dl>
+
+          <div>
+            <a class="btn btn-warning" [routerLink]="['/faixas/editar', faixa.faixaId]">Editar</a>&nbsp;
+            <a class="btn btn-info" [routerLink]="['/faixas/listar-todos']">Voltar</a>
+          </div>
+      </div>
+  </div>
+
+</div>
