@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AlbumService } from '../services/album.service';
 import { Album } from '../models/album';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ALBUNS_LISTAR_TODOS } from 'src/app/shared/routes';
+import { ALBUM_EXCLUIDO_SUCESSO, GOOD_BYE, HOUVE_ERRO_PROCESSAMENTO, OPA } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-excluir',
@@ -31,22 +33,23 @@ export class ExcluirComponent  {
 
     this.albumService.excluirAlbum(this.album.albumId).subscribe(
       evento => { this.sucessoExclusao(evento); },
-      ()     => { this.falha(); }
+      error     => { this.falha(error); }
     );
   }
 
   public sucessoExclusao(evento: any) {
 
-    const toast = this.toastr.success('Álbum excluído com Sucesso!', 'Good bye :D');
+    const toast = this.toastr.success(ALBUM_EXCLUIDO_SUCESSO, GOOD_BYE);
 
     this.loader.hide();
 
     if (toast) {
-      this.router.navigate(['/albuns/listar-todos']);
+      this.router.navigate([ALBUNS_LISTAR_TODOS]);
     }
   }
 
-  public falha() {
-    this.toastr.error('Houve um erro no processamento!', 'Ops! :(');
+  public falha(e) {
+    this.loader.hide();
+    this.toastr.error(e?.error?.errors[0] || HOUVE_ERRO_PROCESSAMENTO, OPA);
   }
 }

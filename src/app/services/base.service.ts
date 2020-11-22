@@ -2,6 +2,7 @@ import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import { ERRO_DESCONHECIDO } from '../shared/messages';
 import { LocalStorageUtils } from '../utils/localstorage';
 
 export abstract class BaseService {
@@ -34,7 +35,9 @@ export abstract class BaseService {
 
     if (response instanceof HttpErrorResponse) {
       if (response.statusText === 'Unknown Error') {
-        customError.push('Ocorreu um erro desconhecido');
+        customError.push(ERRO_DESCONHECIDO);
+      } else {
+        customError.push(response.error.errors[0]);
       }
     }
 

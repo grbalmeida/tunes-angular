@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { ArtistaService } from '../services/artista.service';
 import { ArtistaFormBaseComponent } from '../artista-form.base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ARTISTAS_LISTAR_TODOS } from 'src/app/shared/routes';
+import { ARTISTA_EDITADO_SUCESSO, OCORREU_UM_ERRO, OPA, SUCESSO } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-editar',
@@ -64,17 +66,18 @@ export class EditarComponent extends ArtistaFormBaseComponent implements OnInit,
     this.artistaForm.reset();
     this.errors = [];
 
-    const toast = this.toastr.success('Artista editado com sucesso!', 'Sucesso!');
+    const toast = this.toastr.success(ARTISTA_EDITADO_SUCESSO, SUCESSO);
 
     this.loader.hide();
 
     if (toast) {
-      this.router.navigate(['/artistas/listar-todos']);
+      this.router.navigate([ARTISTAS_LISTAR_TODOS]);
     }
   }
 
   processarFalha(fail: any) {
+    this.loader.hide();
     this.errors = fail?.error?.errors || [];
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    this.toastr.error(OCORREU_UM_ERRO, OPA);
   }
 }

@@ -1,4 +1,5 @@
 import { Router, ActivatedRouteSnapshot } from '@angular/router';
+import { ACESSO_NEGADO, CONTA_LOGIN } from '../shared/routes';
 
 import { LocalStorageUtils } from '../utils/localstorage';
 
@@ -9,7 +10,7 @@ export abstract class BaseGuard {
 
   protected validarClaims(routeAc: ActivatedRouteSnapshot): boolean {
     if (!this.localStorageUtils.obterTokenUsuario()) {
-      this.router.navigate(['/conta/login'], { queryParams: { returnUrl: this.router.url } });
+      this.router.navigate([CONTA_LOGIN], { queryParams: { returnUrl: this.router.url } });
     }
 
     const user = this.localStorageUtils.obterUsuario();
@@ -41,6 +42,6 @@ export abstract class BaseGuard {
   }
 
   private navegarAcessoNegado() {
-    this.router.navigate(['/acesso-negado']);
+    this.router.navigate([ACESSO_NEGADO]);
   }
 }

@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FaixaService } from '../services/faixa.service';
 import { Faixa } from '../models/faixa';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FAIXAS_LISTAR_TODOS } from 'src/app/shared/routes';
+import { FAIXA_EXCLUIDA_SUCESSO, GOOD_BYE, HOUVE_ERRO_PROCESSAMENTO, OPA } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-excluir',
@@ -31,22 +33,23 @@ export class ExcluirComponent  {
 
     this.faixaService.excluirFaixa(this.faixa.faixaId).subscribe(
       evento => { this.sucessoExclusao(evento); },
-      ()     => { this.falha(); }
+      error    => { this.falha(error); }
     );
   }
 
   public sucessoExclusao(evento: any) {
 
-    const toast = this.toastr.success('Faixa excluída com Sucesso!', 'Good bye :D');
+    const toast = this.toastr.success(FAIXA_EXCLUIDA_SUCESSO, GOOD_BYE);
 
     this.loader.hide();
 
     if (toast) {
-      this.router.navigate(['/faixas/listar-todos']);
+      this.router.navigate([FAIXAS_LISTAR_TODOS]);
     }
   }
 
-  public falha() {
-    this.toastr.error('Houve um erro no processamento!', 'Ops! :(');
+  public falha(e) {
+    this.loader.hide();
+    this.toastr.error(e?.error?.errors[0] || HOUVE_ERRO_PROCESSAMENTO, OPA);
   }
 }

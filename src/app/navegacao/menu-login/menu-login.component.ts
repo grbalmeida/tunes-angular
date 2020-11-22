@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HOME } from 'src/app/shared/routes';
 
 import { LocalStorageUtils } from 'src/app/utils/localstorage';
 
@@ -28,6 +29,6 @@ export class MenuLoginComponent {
 
   logout() {
     this.localStorageUtils.limparDadosLocaisUsuario();
-    this.router.navigate(['/home']);
+    this.router.navigate([HOME]);
   }
 }

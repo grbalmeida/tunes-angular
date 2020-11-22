@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { GeneroService } from '../services/genero.service';
 import { GeneroFormBaseComponent } from '../genero-form.base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { GENEROS_LISTAR_TODOS } from 'src/app/shared/routes';
+import { GENERO_EDITADO_SUCESSO, OCORREU_UM_ERRO, OPA, SUCESSO } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-editar',
@@ -64,17 +66,18 @@ export class EditarComponent extends GeneroFormBaseComponent implements OnInit, 
     this.generoForm.reset();
     this.errors = [];
 
-    const toast = this.toastr.success('Gênero editado com sucesso!', 'Sucesso!');
+    const toast = this.toastr.success(GENERO_EDITADO_SUCESSO, SUCESSO);
 
     this.loader.hide();
 
     if (toast) {
-      this.router.navigate(['/generos/listar-todos']);
+      this.router.navigate([GENEROS_LISTAR_TODOS]);
     }
   }
 
   processarFalha(fail: any) {
+    this.loader.hide();
     this.errors = fail?.error?.errors || [];
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    this.toastr.error(OCORREU_UM_ERRO, OPA);
   }
 }

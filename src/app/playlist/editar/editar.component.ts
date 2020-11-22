@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { PlaylistService } from '../services/playlist.service';
 import { PlaylistFormBaseComponent } from '../playlist-form.base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { PLAYLISTS_LISTAR_TODOS } from 'src/app/shared/routes';
+import { OCORREU_UM_ERRO, OPA, PLAYLIST_EDITADA_SUCESSO, SUCESSO } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-editar',
@@ -64,17 +66,18 @@ export class EditarComponent extends PlaylistFormBaseComponent implements OnInit
     this.playlistForm.reset();
     this.errors = [];
 
-    const toast = this.toastr.success('Playlist editada com sucesso!', 'Sucesso!');
+    const toast = this.toastr.success(PLAYLIST_EDITADA_SUCESSO, SUCESSO);
 
     this.loader.hide();
 
     if (toast) {
-      this.router.navigate(['/playlists/listar-todos']);
+      this.router.navigate([PLAYLISTS_LISTAR_TODOS]);
     }
   }
 
   processarFalha(fail: any) {
+    this.loader.hide();
     this.errors = fail?.error?.errors || [];
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    this.toastr.error(OCORREU_UM_ERRO, OPA);
   }
 }

@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { LocalStorageUtils } from '../utils/localstorage';
+import { ACESSO_NEGADO, CONTA_LOGIN } from '../shared/routes';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -19,11 +20,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 401) {
             this.localStorageUtils.limparDadosLocaisUsuario();
-            this.router.navigate(['/conta/login'], { queryParams: { returnUrl: this.router.url } });
+            this.router.navigate([CONTA_LOGIN], { queryParams: { returnUrl: this.router.url } });
           }
 
           if (error.status === 403) {
-            this.router.navigate(['/acesso-negado']);
+            this.router.navigate([ACESSO_NEGADO]);
           }
         }
 

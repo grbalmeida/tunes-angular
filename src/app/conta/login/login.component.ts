@@ -9,6 +9,8 @@ import { Usuario } from '../models/usuario';
 import { ContaService } from '../services/conta.service';
 import { FormBaseComponent } from 'src/app/base-components/form-base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { HOME } from 'src/app/shared/routes';
+import { BEM_VINDO, LOGIN_REALIZADO_SUCESSO, OCORREU_UM_ERRO, OPA } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-login',
@@ -80,21 +82,21 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
 
     this.contaService.LocalStorage.salvarDadosLocaisUsuario(response);
 
-    const toast = this.toastr.success('Login realizado com sucesso!', 'Bem vindo!!!');
+    const toast = this.toastr.success(LOGIN_REALIZADO_SUCESSO, BEM_VINDO);
 
     this.loader.hide();
 
     if (toast) {
       this.returnUrl
         ? this.router.navigate([this.returnUrl])
-        : this.router.navigate(['/home']);
+        : this.router.navigate([HOME]);
     }
   }
 
   processarFalha(fail: any) {
+    this.loader.hide();
     this.errors = fail?.error?.errors;
-
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    this.toastr.error(OCORREU_UM_ERRO, OPA);
   }
 
 }

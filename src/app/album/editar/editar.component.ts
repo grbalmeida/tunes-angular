@@ -8,6 +8,8 @@ import { AlbumService } from '../services/album.service';
 import { AlbumFormBaseComponent } from '../album-form.base.component';
 import { Artista } from 'src/app/artista/models/artista';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ALBUNS_LISTAR_TODOS } from 'src/app/shared/routes';
+import { ALBUM_EDITADO_SUCESSO, OCORREU_UM_ERRO, OPA, SUCESSO } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-editar',
@@ -74,14 +76,15 @@ export class EditarComponent extends AlbumFormBaseComponent implements OnInit, A
 
     this.loader.hide();
 
-    const toast = this.toastr.success('Álbum editado com sucesso!', 'Sucesso!');
+    const toast = this.toastr.success(ALBUM_EDITADO_SUCESSO, SUCESSO);
     if (toast) {
-      this.router.navigate(['/albuns/listar-todos']);
+      this.router.navigate([ALBUNS_LISTAR_TODOS]);
     }
   }
 
   processarFalha(fail: any) {
+    this.loader.hide();
     this.errors = fail?.error?.errors || [];
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    this.toastr.error(OCORREU_UM_ERRO, OPA);
   }
 }

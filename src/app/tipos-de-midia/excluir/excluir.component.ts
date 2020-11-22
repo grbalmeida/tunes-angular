@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { TipoMidiaService } from '../services/tipo-midia.service';
 import { TipoMidia } from '../models/tipo-midia';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TIPOS_DE_MIDIA_LISTAR_TODOS } from 'src/app/shared/routes';
+import { GOOD_BYE, HOUVE_ERRO_PROCESSAMENTO, OPA, TIPO_MIDIA_EXCLUIDO_SUCESSO } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-excluir',
@@ -31,22 +33,23 @@ export class ExcluirComponent  {
 
     this.tipoMidiaService.excluirTipoMidia(this.tipoMidia.tipoMidiaId).subscribe(
       evento => { this.sucessoExclusao(evento); },
-      ()     => { this.falha(); }
+      error     => { this.falha(error); }
     );
   }
 
   public sucessoExclusao(evento: any) {
 
-    const toast = this.toastr.success('Tipo de Mídia excluído com Sucesso!', 'Good bye :D');
+    const toast = this.toastr.success(TIPO_MIDIA_EXCLUIDO_SUCESSO, GOOD_BYE);
 
     this.loader.hide();
 
     if (toast) {
-      this.router.navigate(['/tipos-de-midia/listar-todos']);
+      this.router.navigate([TIPOS_DE_MIDIA_LISTAR_TODOS]);
     }
   }
 
-  public falha() {
-    this.toastr.error('Houve um erro no processamento!', 'Ops! :(');
+  public falha(e) {
+    this.loader.hide();
+    this.toastr.error(e?.error?.errors[0] || HOUVE_ERRO_PROCESSAMENTO, OPA);
   }
 }

@@ -10,6 +10,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Album } from 'src/app/album/models/album';
 import { TipoMidia } from 'src/app/tipos-de-midia/models/tipo-midia';
 import { Genero } from 'src/app/genero/models/genero';
+import { FAIXAS_LISTAR_TODOS } from 'src/app/shared/routes';
+import { FAIXA_EDITADA_SUCESSO, OCORREU_UM_ERRO, OPA, SUCESSO } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-editar',
@@ -96,17 +98,18 @@ export class EditarComponent extends FaixaFormBaseComponent implements OnInit, A
     this.faixaForm.reset();
     this.errors = [];
 
-    const toast = this.toastr.success('Faixa editada com sucesso!', 'Sucesso!');
+    const toast = this.toastr.success(FAIXA_EDITADA_SUCESSO, SUCESSO);
 
     this.loader.hide();
 
     if (toast) {
-      this.router.navigate(['/faixas/listar-todos']);
+      this.router.navigate([FAIXAS_LISTAR_TODOS]);
     }
   }
 
   processarFalha(fail: any) {
+    this.loader.hide();
     this.errors = fail?.error?.errors || [];
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    this.toastr.error(OCORREU_UM_ERRO, OPA);
   }
 }

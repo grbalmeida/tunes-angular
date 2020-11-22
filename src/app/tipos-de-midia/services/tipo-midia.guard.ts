@@ -3,6 +3,7 @@ import { CanDeactivate, Router, CanActivate, ActivatedRouteSnapshot } from '@ang
 
 import { NovoComponent } from '../novo/novo.component';
 import { BaseGuard } from 'src/app/services/base.guard';
+import { ABANDONAR_FORMULARIO } from 'src/app/shared/messages';
 
 @Injectable()
 export class TipoMidiaGuard extends BaseGuard implements CanActivate, CanDeactivate<NovoComponent> {
@@ -13,7 +14,7 @@ export class TipoMidiaGuard extends BaseGuard implements CanActivate, CanDeactiv
 
   canDeactivate(component: NovoComponent) {
     if (component.mudancasNaoSalvas) {
-      return window.confirm('Tem certeza que deseja abandonar o preenchimento do formulário?');
+      return window.confirm(ABANDONAR_FORMULARIO);
     }
 
     return true;

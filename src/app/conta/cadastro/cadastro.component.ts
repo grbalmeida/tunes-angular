@@ -9,6 +9,8 @@ import { ContaService } from '../services/conta.service';
 import { Router } from '@angular/router';
 import { FormBaseComponent } from 'src/app/base-components/form-base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { HOME } from 'src/app/shared/routes';
+import { BEM_VINDO, OCORREU_UM_ERRO, OPA, REGISTRO_REALIZADO_SUCESSO } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-cadastro',
@@ -97,18 +99,18 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
 
     this.contaService.LocalStorage.salvarDadosLocaisUsuario(response);
 
-    const toast = this.toastr.success('Registro realizado com sucesso!', 'Bem vindo!!!');
+    const toast = this.toastr.success(REGISTRO_REALIZADO_SUCESSO, BEM_VINDO);
 
     this.loader.hide();
 
     if (toast) {
-      this.router.navigate(['/home']);
+      this.router.navigate([HOME]);
     }
   }
 
   processarFalha(fail: any) {
+    this.loader.hide();
     this.errors = fail?.error?.errors;
-
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    this.toastr.error(OCORREU_UM_ERRO, OPA);
   }
 }
