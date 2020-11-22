@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { AlbumService } from '../services/album.service';
 import { Album } from '../models/album';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-excluir',
@@ -18,13 +19,16 @@ export class ExcluirComponent  {
     private albumService: AlbumService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
 
     this.album = this.route.snapshot.data.album;
   }
 
   public excluirAlbum() {
+    this.loader.show();
+
     this.albumService.excluirAlbum(this.album.albumId).subscribe(
       evento => { this.sucessoExclusao(evento); },
       ()     => { this.falha(); }
@@ -34,10 +38,11 @@ export class ExcluirComponent  {
   public sucessoExclusao(evento: any) {
 
     const toast = this.toastr.success('Álbum excluído com Sucesso!', 'Good bye :D');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/albuns/listar-todos']);
-      });
+      this.router.navigate(['/albuns/listar-todos']);
     }
   }
 

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AlbumService } from '../services/album.service';
 import { AlbumFormBaseComponent } from '../album-form.base.component';
 import { Artista } from 'src/app/artista/models/artista';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-editar',
@@ -22,7 +23,8 @@ export class EditarComponent extends AlbumFormBaseComponent implements OnInit, A
     private albumService: AlbumService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
 
@@ -50,6 +52,8 @@ export class EditarComponent extends AlbumFormBaseComponent implements OnInit, A
 
   editarAlbum() {
     if (this.albumForm.dirty && this.albumForm.valid) {
+      this.loader.show();
+
       const artistaId = Number(this.albumForm.get('artistaId').value);
       this.album = { ...this.album, artista: this.artistas.find(a => a.artistaId === artistaId) };
       this.album = Object.assign({}, this.album, this.albumForm.value);
@@ -68,11 +72,11 @@ export class EditarComponent extends AlbumFormBaseComponent implements OnInit, A
     this.albumForm.reset();
     this.errors = [];
 
+    this.loader.hide();
+
     const toast = this.toastr.success('Álbum editado com sucesso!', 'Sucesso!');
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/albuns/listar-todos']);
-      });
+      this.router.navigate(['/albuns/listar-todos']);
     }
   }
 

@@ -8,6 +8,7 @@ import { Usuario } from '../models/usuario';
 import { ContaService } from '../services/conta.service';
 import { Router } from '@angular/router';
 import { FormBaseComponent } from 'src/app/base-components/form-base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-cadastro',
@@ -27,7 +28,8 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
     private fb: FormBuilder,
     private contaService: ContaService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
 
@@ -75,6 +77,8 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
 
   adicionarConta() {
     if (this.cadastroForm.dirty && this.cadastroForm.valid) {
+      this.loader.show();
+
       this.usuario = Object.assign({}, this.usuario, this.cadastroForm.value);
 
       this.contaService.registrarUsuario(this.usuario)
@@ -95,10 +99,10 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
 
     const toast = this.toastr.success('Registro realizado com sucesso!', 'Bem vindo!!!');
 
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/home']);
-      });
+      this.router.navigate(['/home']);
     }
   }
 

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { TipoMidiaService } from '../services/tipo-midia.service';
 import { TipoMidia } from '../models/tipo-midia';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-excluir',
@@ -18,13 +19,16 @@ export class ExcluirComponent  {
     private tipoMidiaService: TipoMidiaService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
 
     this.tipoMidia = this.route.snapshot.data.tipoMidia;
   }
 
   public excluirTipoMidia() {
+    this.loader.show();
+
     this.tipoMidiaService.excluirTipoMidia(this.tipoMidia.tipoMidiaId).subscribe(
       evento => { this.sucessoExclusao(evento); },
       ()     => { this.falha(); }
@@ -34,10 +38,11 @@ export class ExcluirComponent  {
   public sucessoExclusao(evento: any) {
 
     const toast = this.toastr.success('Tipo de Mídia excluído com Sucesso!', 'Good bye :D');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/tipos-de-midia/listar-todos']);
-      });
+      this.router.navigate(['/tipos-de-midia/listar-todos']);
     }
   }
 

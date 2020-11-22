@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,7 +20,8 @@ export class NovoComponent extends TipoMidiaFormBaseComponent implements OnInit,
     private fb: FormBuilder,
     private tipoMidiaService: TipoMidiaService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
   }
@@ -37,6 +39,8 @@ export class NovoComponent extends TipoMidiaFormBaseComponent implements OnInit,
 
   adicionarTipoMidia() {
     if (this.tipoMidiaForm.dirty && this.tipoMidiaForm.valid) {
+      this.loader.show();
+
       this.tipoMidia = Object.assign({}, this.tipoMidia, this.tipoMidiaForm.value);
 
       this.tipoMidiaService.novoTipoMidia(this.tipoMidia)
@@ -54,10 +58,11 @@ export class NovoComponent extends TipoMidiaFormBaseComponent implements OnInit,
     this.errors = [];
 
     const toast = this.toastr.success('Tipo de Mídia cadastrado com sucesso!', 'Sucesso!');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/tipos-de-midia/listar-todos']);
-      });
+      this.router.navigate(['/tipos-de-midia/listar-todos']);
     }
   }
 

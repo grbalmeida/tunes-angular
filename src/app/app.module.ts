@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavegacaoModule } from './navegacao/navegacao.module';
 import { ErrorInterceptor } from './services/error.handler.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
@@ -26,7 +27,8 @@ export const httpInterceptorProviders = [
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule
   ],
   providers: [
     httpInterceptorProviders

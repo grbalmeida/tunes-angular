@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { GeneroService } from '../services/genero.service';
 import { GeneroFormBaseComponent } from '../genero-form.base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-novo',
@@ -19,7 +20,8 @@ export class NovoComponent extends GeneroFormBaseComponent implements OnInit, Af
     private fb: FormBuilder,
     private generoService: GeneroService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
   }
@@ -37,6 +39,8 @@ export class NovoComponent extends GeneroFormBaseComponent implements OnInit, Af
 
   adicionarGenero() {
     if (this.generoForm.dirty && this.generoForm.valid) {
+      this.loader.show();
+
       this.genero = Object.assign({}, this.genero, this.generoForm.value);
 
       this.generoService.novoGenero(this.genero)
@@ -54,10 +58,11 @@ export class NovoComponent extends GeneroFormBaseComponent implements OnInit, Af
     this.errors = [];
 
     const toast = this.toastr.success('Gênero cadastrado com sucesso!', 'Sucesso!');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/generos/listar-todos']);
-      });
+      this.router.navigate(['/generos/listar-todos']);
     }
   }
 

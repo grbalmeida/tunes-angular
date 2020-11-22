@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { GeneroService } from '../services/genero.service';
 import { GeneroFormBaseComponent } from '../genero-form.base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-editar',
@@ -20,7 +21,8 @@ export class EditarComponent extends GeneroFormBaseComponent implements OnInit, 
     private generoService: GeneroService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
 
@@ -44,6 +46,8 @@ export class EditarComponent extends GeneroFormBaseComponent implements OnInit, 
 
   editarGenero() {
     if (this.generoForm.dirty && this.generoForm.valid) {
+      this.loader.show();
+
       this.genero = Object.assign({}, this.genero, this.generoForm.value);
 
       this.generoService.atualizarGenero(this.genero)
@@ -61,10 +65,11 @@ export class EditarComponent extends GeneroFormBaseComponent implements OnInit, 
     this.errors = [];
 
     const toast = this.toastr.success('Gênero editado com sucesso!', 'Sucesso!');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/generos/listar-todos']);
-      });
+      this.router.navigate(['/generos/listar-todos']);
     }
   }
 

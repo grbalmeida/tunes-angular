@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Usuario } from '../models/usuario';
 import { ContaService } from '../services/conta.service';
 import { FormBaseComponent } from 'src/app/base-components/form-base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
     private contaService: ContaService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
 
@@ -60,6 +62,8 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
 
   login() {
     if (this.loginForm.dirty && this.loginForm.valid) {
+      this.loader.show();
+
       this.usuario = Object.assign({}, this.usuario, this.loginForm.value);
 
       this.contaService.login(this.usuario)
@@ -78,12 +82,12 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
 
     const toast = this.toastr.success('Login realizado com sucesso!', 'Bem vindo!!!');
 
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.returnUrl
-          ? this.router.navigate([this.returnUrl])
-          : this.router.navigate(['/home']);
-      });
+      this.returnUrl
+        ? this.router.navigate([this.returnUrl])
+        : this.router.navigate(['/home']);
     }
   }
 

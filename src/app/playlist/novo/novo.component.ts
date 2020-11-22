@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { PlaylistService } from '../services/playlist.service';
 import { PlaylistFormBaseComponent } from '../playlist-form.base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-novo',
@@ -19,7 +20,8 @@ export class NovoComponent extends PlaylistFormBaseComponent implements OnInit, 
     private fb: FormBuilder,
     private playlistService: PlaylistService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
   }
@@ -37,6 +39,8 @@ export class NovoComponent extends PlaylistFormBaseComponent implements OnInit, 
 
   adicionarPlaylist() {
     if (this.playlistForm.dirty && this.playlistForm.valid) {
+      this.loader.show();
+
       this.playlist = Object.assign({}, this.playlist, this.playlistForm.value);
 
       this.playlistService.novaPlaylist(this.playlist)
@@ -54,10 +58,11 @@ export class NovoComponent extends PlaylistFormBaseComponent implements OnInit, 
     this.errors = [];
 
     const toast = this.toastr.success('Playlist cadastrada com sucesso!', 'Sucesso!');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/playlists/listar-todos']);
-      });
+      this.router.navigate(['/playlists/listar-todos']);
     }
   }
 

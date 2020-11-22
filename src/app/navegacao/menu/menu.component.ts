@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalStorageUtils } from 'src/app/utils/localstorage';
 
 @Component({
   selector: 'app-menu',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
   public isCollapsed: boolean;
+  public localStorageUtils = new LocalStorageUtils();
 
   constructor() {
     this.isCollapsed = true;

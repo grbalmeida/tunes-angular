@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { GeneroService } from '../services/genero.service';
 import { Genero } from '../models/genero';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-excluir',
@@ -18,13 +19,16 @@ export class ExcluirComponent  {
     private generoService: GeneroService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
 
     this.genero = this.route.snapshot.data.genero;
   }
 
   public excluirGenero() {
+    this.loader.show();
+
     this.generoService.excluirGenero(this.genero.generoId).subscribe(
       evento => { this.sucessoExclusao(evento); },
       ()     => { this.falha(); }
@@ -34,10 +38,11 @@ export class ExcluirComponent  {
   public sucessoExclusao(evento: any) {
 
     const toast = this.toastr.success('Gênero excluído com Sucesso!', 'Good bye :D');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/generos/listar-todos']);
-      });
+      this.router.navigate(['/generos/listar-todos']);
     }
   }
 

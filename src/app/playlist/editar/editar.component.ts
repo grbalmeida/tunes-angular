@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { PlaylistService } from '../services/playlist.service';
 import { PlaylistFormBaseComponent } from '../playlist-form.base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-editar',
@@ -20,7 +21,8 @@ export class EditarComponent extends PlaylistFormBaseComponent implements OnInit
     private playlistService: PlaylistService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
 
@@ -44,6 +46,8 @@ export class EditarComponent extends PlaylistFormBaseComponent implements OnInit
 
   editarPlaylist() {
     if (this.playlistForm.dirty && this.playlistForm.valid) {
+      this.loader.show();
+
       this.playlist = Object.assign({}, this.playlist, this.playlistForm.value);
 
       this.playlistService.atualizarPlaylist(this.playlist)
@@ -61,10 +65,11 @@ export class EditarComponent extends PlaylistFormBaseComponent implements OnInit
     this.errors = [];
 
     const toast = this.toastr.success('Playlist editada com sucesso!', 'Sucesso!');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/playlists/listar-todos']);
-      });
+      this.router.navigate(['/playlists/listar-todos']);
     }
   }
 

@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { ArtistaService } from '../services/artista.service';
 import { ArtistaFormBaseComponent } from '../artista-form.base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-novo',
@@ -19,7 +20,8 @@ export class NovoComponent extends ArtistaFormBaseComponent implements OnInit, A
     private fb: FormBuilder,
     private artistaService: ArtistaService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
   }
@@ -37,6 +39,8 @@ export class NovoComponent extends ArtistaFormBaseComponent implements OnInit, A
 
   adicionarArtista() {
     if (this.artistaForm.dirty && this.artistaForm.valid) {
+      this.loader.show();
+
       this.artista = Object.assign({}, this.artista, this.artistaForm.value);
 
       this.artistaService.novoArtista(this.artista)
@@ -54,10 +58,11 @@ export class NovoComponent extends ArtistaFormBaseComponent implements OnInit, A
     this.errors = [];
 
     const toast = this.toastr.success('Artista cadastrado com sucesso!', 'Sucesso!');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/artistas/listar-todos']);
-      });
+      this.router.navigate(['/artistas/listar-todos']);
     }
   }
 

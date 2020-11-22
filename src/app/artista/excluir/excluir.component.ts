@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { ArtistaService } from '../services/artista.service';
 import { Artista } from '../models/artista';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-excluir',
@@ -18,13 +19,16 @@ export class ExcluirComponent  {
     private artistaService: ArtistaService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
 
     this.artista = this.route.snapshot.data.artista;
   }
 
   public excluirArtista() {
+    this.loader.show();
+
     this.artistaService.excluirArtista(this.artista.artistaId).subscribe(
       evento => { this.sucessoExclusao(evento); },
       ()     => { this.falha(); }
@@ -34,10 +38,11 @@ export class ExcluirComponent  {
   public sucessoExclusao(evento: any) {
 
     const toast = this.toastr.success('Artista excluído com Sucesso!', 'Good bye :D');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/artistas/listar-todos']);
-      });
+      this.router.navigate(['/artistas/listar-todos']);
     }
   }
 

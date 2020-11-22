@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,7 +21,8 @@ export class EditarComponent extends TipoMidiaFormBaseComponent implements OnIni
     private tipoMidiaService: TipoMidiaService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
 
@@ -44,6 +46,8 @@ export class EditarComponent extends TipoMidiaFormBaseComponent implements OnIni
 
   editarTipoMidia() {
     if (this.tipoMidiaForm.dirty && this.tipoMidiaForm.valid) {
+      this.loader.show();
+
       this.tipoMidia = Object.assign({}, this.tipoMidia, this.tipoMidiaForm.value);
 
       this.tipoMidiaService.atualizarTipoMidia(this.tipoMidia)
@@ -61,10 +65,11 @@ export class EditarComponent extends TipoMidiaFormBaseComponent implements OnIni
     this.errors = [];
 
     const toast = this.toastr.success('Tipo de Mídia editado com sucesso!', 'Sucesso!');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/tipos-de-midia/listar-todos']);
-      });
+      this.router.navigate(['/tipos-de-midia/listar-todos']);
     }
   }
 

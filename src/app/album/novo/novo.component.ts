@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AlbumService } from '../services/album.service';
 import { AlbumFormBaseComponent } from '../album-form.base.component';
 import { Artista } from 'src/app/artista/models/artista';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-novo',
@@ -22,7 +23,8 @@ export class NovoComponent extends AlbumFormBaseComponent implements OnInit, Aft
     private albumService: AlbumService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: NgxSpinnerService
   ) {
     super();
   }
@@ -43,6 +45,8 @@ export class NovoComponent extends AlbumFormBaseComponent implements OnInit, Aft
 
   adicionarAlbum() {
     if (this.albumForm.dirty && this.albumForm.valid) {
+      this.loader.show();
+
       const artistaId = Number(this.albumForm.get('artistaId').value);
       this.album = { ...this.album, artista: this.artistas.find(a => a.artistaId === artistaId) };
       this.album = Object.assign({}, this.album, this.albumForm.value);
@@ -62,10 +66,11 @@ export class NovoComponent extends AlbumFormBaseComponent implements OnInit, Aft
     this.errors = [];
 
     const toast = this.toastr.success('Álbum cadastrado com sucesso!', 'Sucesso!');
+
+    this.loader.hide();
+
     if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/albuns/listar-todos']);
-      });
+      this.router.navigate(['/albuns/listar-todos']);
     }
   }
 
