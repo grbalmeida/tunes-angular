@@ -1,0 +1,38 @@
+<div class="container main-container">
+
+  <h1>Lista de Playlists</h1>
+  <hr>
+
+  <p>
+      <a class="btn btn-info" [routerLink]="['/playlists/adicionar-novo']">Nova Playlist</a>
+  </p>
+
+  <table class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                  Nome
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let playlist of playlists">
+              <td>
+                  {{ playlist.nome }}
+              </td>
+              <td class="text-right">
+                <a class="btn btn-warning" [routerLink]="['/playlists/detalhes', playlist.playlistId]">
+                  <span class="fa fa-search"></span>
+                </a>&nbsp;
+                <a class="btn btn-info" [routerLink]="['/playlists/editar', playlist.playlistId]">
+                  <span class="fa fa-pencil-alt"></span>
+                </a>&nbsp;
+                <a class="btn btn-danger" [routerLink]="['/playlists/excluir', playlist.playlistId]">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

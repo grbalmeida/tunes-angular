@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'generos',
     loadChildren: () => import('./genero/genero.module').then(m => m.GeneroModule)
   },
+  {
+    path: 'playlists',
+    loadChildren: () => import('./playlist/playlist.module').then(m => m.PlaylistModule)
+  },
 
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },
