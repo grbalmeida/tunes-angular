@@ -1,0 +1,44 @@
+<div class="container main-container">
+
+  <h1>Lista de Álbuns</h1>
+  <hr>
+
+  <p>
+      <a class="btn btn-info" [routerLink]="['/albuns/adicionar-novo']">Novo Álbum</a>
+  </p>
+
+  <table class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                Título
+              </th>
+              <th>
+                Artista
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let album of albuns">
+              <td>
+                {{ album.titulo }}
+              </td>
+              <td>
+                {{ album.artista.nome }}
+              </td>
+              <td class="text-right">
+                <a class="btn btn-warning" [routerLink]="['/albuns/detalhes', album.albumId]">
+                  <span class="fa fa-search"></span>
+                </a>&nbsp;
+                <a class="btn btn-info" [routerLink]="['/albuns/editar', album.albumId]">
+                  <span class="fa fa-pencil-alt"></span>
+                </a>&nbsp;
+                <a class="btn btn-danger" [routerLink]="['/albuns/excluir', album.albumId]">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

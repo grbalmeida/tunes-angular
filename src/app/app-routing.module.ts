@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'tipos-de-midia',
     loadChildren: () => import('./tipos-de-midia/tipo-midia.module').then(m => m.TipoMidiaModule)
   },
+  {
+    path: 'albuns',
+    loadChildren: () => import('./album/album.module').then(m => m.AlbumModule)
+  },
 
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },
