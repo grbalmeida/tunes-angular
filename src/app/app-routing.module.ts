@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'artistas',
     loadChildren: () => import('./artista/artista.module').then(m => m.ArtistaModule)
   },
+  {
+    path: 'generos',
+    loadChildren: () => import('./genero/genero.module').then(m => m.GeneroModule)
+  },
 
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },

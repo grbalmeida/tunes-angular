@@ -1,0 +1,38 @@
+<div class="container main-container">
+
+  <h1>Lista de Gêneros</h1>
+  <hr>
+
+  <p>
+      <a class="btn btn-info" [routerLink]="['/generos/adicionar-novo']">Novo Gênero</a>
+  </p>
+
+  <table class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                  Nome
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let genero of generos">
+              <td>
+                  {{ genero.nome }}
+              </td>
+              <td class="text-right">
+                <a class="btn btn-warning" [routerLink]="['/generos/detalhes', genero.generoId]">
+                  <span class="fa fa-search"></span>
+                </a>&nbsp;
+                <a class="btn btn-info" [routerLink]="['/generos/editar', genero.generoId]">
+                  <span class="fa fa-pencil-alt"></span>
+                </a>&nbsp;
+                <a class="btn btn-danger" [routerLink]="['/generos/excluir', genero.generoId]">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
