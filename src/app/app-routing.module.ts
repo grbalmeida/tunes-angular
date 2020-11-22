@@ -24,6 +24,10 @@ const routes: Routes = [
     path: 'playlists',
     loadChildren: () => import('./playlist/playlist.module').then(m => m.PlaylistModule)
   },
+  {
+    path: 'tipos-de-midia',
+    loadChildren: () => import('./tipos-de-midia/tipo-midia.module').then(m => m.TipoMidiaModule)
+  },
 
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },

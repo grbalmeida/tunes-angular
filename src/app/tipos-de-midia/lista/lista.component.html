@@ -1,0 +1,38 @@
+<div class="container main-container">
+
+  <h1>Lista de Tipos de Mídia</h1>
+  <hr>
+
+  <p>
+      <a class="btn btn-info" [routerLink]="['/tipos-de-midia/adicionar-novo']">Novo Tipo de Mídia</a>
+  </p>
+
+  <table class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                  Nome
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let tipoMidia of tiposDeMidia">
+              <td>
+                  {{ tipoMidia.nome }}
+              </td>
+              <td class="text-right">
+                <a class="btn btn-warning" [routerLink]="['/tipos-de-midia/detalhes', tipoMidia.tipoMidiaId]">
+                  <span class="fa fa-search"></span>
+                </a>&nbsp;
+                <a class="btn btn-info" [routerLink]="['/tipos-de-midia/editar', tipoMidia.tipoMidiaId]">
+                  <span class="fa fa-pencil-alt"></span>
+                </a>&nbsp;
+                <a class="btn btn-danger" [routerLink]="['/tipos-de-midia/excluir', tipoMidia.tipoMidiaId]">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
