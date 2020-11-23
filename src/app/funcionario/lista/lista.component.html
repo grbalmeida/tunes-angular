@@ -1,0 +1,68 @@
+<div class="container main-container">
+
+  <h1>Funcionários</h1>
+  <hr>
+
+  <p>
+      <a class="btn btn-info" [routerLink]="['/funcionarios/adicionar-novo']">Novo Funcionário</a>
+  </p>
+
+  <table class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                Nome Completo
+              </th>
+              <th>
+                Título
+              </th>
+              <th>
+                Data de Nascimento
+              </th>
+              <th>
+                Data de Admissão
+              </th>
+              <th>
+                Fone
+              </th>
+              <th>
+                Email
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let funcionario of funcionarios">
+              <td>
+                {{ funcionario.primeiroNome + ' ' + funcionario.sobrenome }}
+              </td>
+              <td>
+                {{ funcionario.titulo }}
+              </td>
+              <td>
+                {{ funcionario.dataNascimento | date:'dd/MM/yyyy' }}
+              </td>
+              <td>
+                {{ funcionario.dataAdmissao | date:'dd/MM/yyyy' }}
+              </td>
+              <td>
+                {{ funcionario.fone }}
+              </td>
+              <td>
+                {{ funcionario.email }}
+              </td>
+              <td class="text-right">
+                <a class="btn btn-warning" [routerLink]="['/funcionarios/detalhes', funcionario.funcionarioId]">
+                  <span class="fa fa-search"></span>
+                </a>&nbsp;
+                <a class="btn btn-info" [routerLink]="['/funcionarios/editar', funcionario.funcionarioId]">
+                  <span class="fa fa-pencil-alt"></span>
+                </a>&nbsp;
+                <a class="btn btn-danger" [routerLink]="['/funcionarios/excluir', funcionario.funcionarioId]">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

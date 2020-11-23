@@ -31,5 +31,9 @@ export const TIPO_MIDIA_EDITADO_SUCESSO = 'Tipo de Mídia editado com sucesso!';
 export const TIPO_MIDIA_EXCLUIDO_SUCESSO = 'Tipo de Mídia excluído com sucesso!';
 export const TIPO_MIDIA_CADASTRADO_SUCESSO = 'Tipo de Mídia cadastrado com sucesso!';
 
+export const FUNCIONARIO_EDITADO_SUCESSO = 'Funcionário editado com sucesso!';
+export const FUNCIONARIO_EXCLUIDO_SUCESSO = 'Funcionário excluído com sucesso!';
+export const FUNCIONARIO_CADASTRADO_SUCESSO = 'Funcionário cadastrado com sucesso!';
+
 export const REGISTRO_REALIZADO_SUCESSO = 'Registro realizado com sucesso!';
 export const LOGIN_REALIZADO_SUCESSO = 'Login realizado com sucesso!';

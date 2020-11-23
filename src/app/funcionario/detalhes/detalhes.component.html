@@ -1,0 +1,49 @@
+<div class="container main-container">
+  <h4>{{ funcionario.primeiroNome + ' ' + funcionario.sobrenome }} </h4>
+  <br>
+  <h5>Você tem certeza disso?</h5>
+
+  <div class="row">
+      <div class="col-md-6">
+          <dl>
+            <dt>Nome Completo</dt>
+            <dd>{{ funcionario.primeiroNome + ' ' + funcionario.sobrenome }}</dd>
+            <dt>Título</dt>
+            <dd>{{ funcionario.titulo }}</dd>
+            <dt>Data de Nascimento</dt>
+            <dd>{{ funcionario.dataNascimento | date:'dd/MM/yyyy' }}</dd>
+            <dt>Data de Admissão</dt>
+            <dd>{{ funcionario.dataAdmissao | date:'dd/MM/yyyy' }}</dd>
+            <dt>Gerente</dt>
+            <dd>{{ funcionario.gerente?.primeiroNome }}</dd>
+          </dl>
+
+          <h6>Endereço</h6>
+
+          <dl>
+            <dt>Endereço</dt>
+            <dd>{{ funcionario.endereco }}</dd>
+            <dt>Cidade</dt>
+            <dd>{{ funcionario.cidade }}</dd>
+            <dt>Estado</dt>
+            <dd>{{ funcionario.estado }}</dd>
+            <dt>País</dt>
+            <dd>{{ funcionario.pais }}</dd>
+            <dt>CEP</dt>
+            <dd>{{ funcionario.cep }}</dd>
+            <dt>Fone</dt>
+            <dd>{{ funcionario.fone }}</dd>
+            <dt>Fax</dt>
+            <dd>{{ funcionario.fax }}</dd>
+            <dt>Email</dt>
+            <dd>{{ funcionario.email }}</dd>
+          </dl>
+
+          <div>
+            <a class="btn btn-warning" [routerLink]="['/funcionarios/editar', funcionario.funcionarioId]">Editar</a>&nbsp;
+            <a class="btn btn-info" [routerLink]="['/funcionarios/listar-todos']">Voltar</a>
+          </div>
+      </div>
+  </div>
+
+</div>

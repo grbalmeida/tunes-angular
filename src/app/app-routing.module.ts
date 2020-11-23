@@ -36,6 +36,10 @@ const routes: Routes = [
     path: 'faixas',
     loadChildren: () => import('./faixa/faixa.module').then(m => m.FaixaModule)
   },
+  {
+    path: 'funcionarios',
+    loadChildren: () => import('./funcionario/funcionario.module').then(m => m.FuncionarioModule)
+  },
 
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },

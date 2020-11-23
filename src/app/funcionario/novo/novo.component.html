@@ -1,0 +1,171 @@
+<div class="container main-container">
+
+  <h3>Novo Funcionário</h3>
+
+  <hr>
+  <div class="row">
+      <div class="col-md-10">
+          <form enctype="multipart/form-data" (ngSubmit)="adicionarFuncionario()" [formGroup]="funcionarioForm">
+
+              <div class="alert alert-danger" *ngIf="errors.length > 0">
+                  <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                  <ul>
+                      <li *ngFor="let error of errors">{{ error }}</li>
+                  </ul>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Primeiro Nome</label>
+                <div>
+                  <input class="form-control" id="primeiroNome" type="text" placeholder="Primeiro Nome (requerido)" formControlName="primeiroNome" [ngClass]="{'is-invalid': displayMessage.primeiroNome }" />
+                  <span class="text-danger" *ngIf="displayMessage.primeiroNome">
+                    <p [innerHTML]="displayMessage.primeiroNome"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Sobrenome</label>
+                <div>
+                  <input class="form-control" id="sobrenome" type="text" placeholder="Sobrenome (requerido)" formControlName="sobrenome" [ngClass]="{'is-invalid': displayMessage.sobrenome }" />
+                  <span class="text-danger" *ngIf="displayMessage.sobrenome">
+                    <p [innerHTML]="displayMessage.sobrenome"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Título</label>
+                <div>
+                  <input class="form-control" id="titulo" type="text" placeholder="Título" formControlName="titulo" [ngClass]="{'is-invalid': displayMessage.titulo }" />
+                  <span class="text-danger" *ngIf="displayMessage.titulo">
+                    <p [innerHTML]="displayMessage.titulo"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Data de Nascimento</label>
+                <div>
+                  <input class="form-control" id="dataNascimento" type="date" placeholder="Data de Nascimento" formControlName="dataNascimento" [ngClass]="{'is-invalid': displayMessage.dataNascimento }" />
+                  <span class="text-danger" *ngIf="displayMessage.dataNascimento">
+                    <p [innerHTML]="displayMessage.dataNascimento"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Data de Admissão</label>
+                <div>
+                  <input class="form-control" id="dataAdmissao" type="date" placeholder="Data de Admissão" formControlName="dataAdmissao" [ngClass]="{'is-invalid': displayMessage.dataAdmissao }" />
+                  <span class="text-danger" *ngIf="displayMessage.dataAdmissao">
+                    <p [innerHTML]="displayMessage.dataAdmissao"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Endereço</label>
+                <div>
+                  <input class="form-control" id="endereco" type="text" placeholder="Endereço" formControlName="endereco" [ngClass]="{'is-invalid': displayMessage.endereco }" />
+                  <span class="text-danger" *ngIf="displayMessage.endereco">
+                    <p [innerHTML]="displayMessage.endereco"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Cidade</label>
+                <div>
+                  <input class="form-control" id="cidade" type="text" placeholder="Cidade" formControlName="cidade" [ngClass]="{'is-invalid': displayMessage.cidade }" />
+                  <span class="text-danger" *ngIf="displayMessage.cidade">
+                    <p [innerHTML]="displayMessage.cidade"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Estado</label>
+                <div>
+                  <input class="form-control" id="estado" type="text" placeholder="Estado" formControlName="estado" [ngClass]="{'is-invalid': displayMessage.estado }" />
+                  <span class="text-danger" *ngIf="displayMessage.estado">
+                    <p [innerHTML]="displayMessage.estado"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">País</label>
+                <div>
+                  <input class="form-control" id="pais" type="text" placeholder="País" formControlName="pais" [ngClass]="{'is-invalid': displayMessage.pais }" />
+                  <span class="text-danger" *ngIf="displayMessage.pais">
+                    <p [innerHTML]="displayMessage.pais"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">CEP</label>
+                <div>
+                  <input class="form-control" id="cep" type="text" placeholder="CEP" formControlName="cep" [ngClass]="{'is-invalid': displayMessage.cep }" />
+                  <span class="text-danger" *ngIf="displayMessage.cep">
+                    <p [innerHTML]="displayMessage.cep"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Fone</label>
+                <div>
+                  <input class="form-control" id="fone" type="text" placeholder="Fone" formControlName="fone" [ngClass]="{'is-invalid': displayMessage.fone }" />
+                  <span class="text-danger" *ngIf="displayMessage.fone">
+                    <p [innerHTML]="displayMessage.fone"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Fax</label>
+                <div>
+                  <input class="form-control" id="fax" type="text" placeholder="Fax" formControlName="fax" [ngClass]="{'is-invalid': displayMessage.fax }" />
+                  <span class="text-danger" *ngIf="displayMessage.fax">
+                    <p [innerHTML]="displayMessage.fax"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Email</label>
+                <div>
+                  <input class="form-control" id="email" type="email" placeholder="Email" formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }" />
+                  <span class="text-danger" *ngIf="displayMessage.email">
+                    <p [innerHTML]="displayMessage.email"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label">Gerente</label>
+                <div>
+                  <select formControlName="gerenteId">
+                    <option
+                      *ngFor="let gerente of funcionarios"
+                      value="{{ gerente.funcionarioId }}"
+                    >
+                      {{ gerente.primeiroNome + ' ' + gerente.sobrenome }}
+                    </option>
+                  </select>
+                  <span class="text-danger" *ngIf="displayMessage.albumId">
+                    <p [innerHTML]="displayMessage.albumId"></p>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <input type="submit" [disabled]="!funcionarioForm.valid" value="Cadastrar" class="btn btn-primary" id="cadastroFuncionario">&nbsp;
+                  <a class="btn btn-info" [routerLink]="['/funcionarios/listar-todos']">Voltar</a>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
