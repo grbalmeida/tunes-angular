@@ -1,11 +1,11 @@
 <div class="container main-container">
 
-  <h3>Novo Funcionário</h3>
+  <h3>Editar Cliente - {{ cliente.primeiroNome + ' ' + cliente.sobrenome }}</h3>
 
   <hr>
   <div class="row">
       <div class="col-md-10">
-          <form enctype="multipart/form-data" (ngSubmit)="adicionarFuncionario()" [formGroup]="funcionarioForm">
+          <form enctype="multipart/form-data" (ngSubmit)="editarCliente()" [formGroup]="clienteForm">
 
               <div class="alert alert-danger" *ngIf="errors.length > 0">
                   <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
@@ -35,31 +35,11 @@
               </div>
 
               <div class="form-group">
-                <label class="control-label">Título</label>
+                <label class="control-label">Empresa</label>
                 <div>
-                  <input class="form-control" id="titulo" type="text" placeholder="Título" formControlName="titulo" [ngClass]="{'is-invalid': displayMessage.titulo }" />
-                  <span class="text-danger" *ngIf="displayMessage.titulo">
-                    <p [innerHTML]="displayMessage.titulo"></p>
-                  </span>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">Data de Nascimento</label>
-                <div>
-                  <input class="form-control" id="dataNascimento" type="date" placeholder="Data de Nascimento" formControlName="dataNascimento" [ngClass]="{'is-invalid': displayMessage.dataNascimento }" />
-                  <span class="text-danger" *ngIf="displayMessage.dataNascimento">
-                    <p [innerHTML]="displayMessage.dataNascimento"></p>
-                  </span>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">Data de Admissão</label>
-                <div>
-                  <input class="form-control" id="dataAdmissao" type="date" placeholder="Data de Admissão" formControlName="dataAdmissao" [ngClass]="{'is-invalid': displayMessage.dataAdmissao }" />
-                  <span class="text-danger" *ngIf="displayMessage.dataAdmissao">
-                    <p [innerHTML]="displayMessage.dataAdmissao"></p>
+                  <input class="form-control" id="empresa" type="text" placeholder="Empresa" formControlName="empresa" [ngClass]="{'is-invalid': displayMessage.empresa }" />
+                  <span class="text-danger" *ngIf="displayMessage.empresa">
+                    <p [innerHTML]="displayMessage.empresa"></p>
                   </span>
                 </div>
               </div>
@@ -145,25 +125,25 @@
               </div>
 
               <div class="form-group">
-                <label class="control-label">Gerente</label>
+                <label class="control-label">Suporte</label>
                 <div>
-                  <select formControlName="gerenteId">
+                  <select formControlName="suporteId">
                     <option
-                      *ngFor="let gerente of funcionarios"
-                      value="{{ gerente.funcionarioId }}"
+                      *ngFor="let suporte of funcionarios"
+                      value="{{ suporte.funcionarioId }}"
                     >
-                      {{ gerente.primeiroNome + ' ' + gerente.sobrenome }}
+                      {{ suporte.primeiroNome + ' ' + suporte.sobrenome }}
                     </option>
                   </select>
-                  <span class="text-danger" *ngIf="displayMessage.gerenteId">
-                    <p [innerHTML]="displayMessage.gerenteId"></p>
+                  <span class="text-danger" *ngIf="displayMessage.suporteId">
+                    <p [innerHTML]="displayMessage.suporteId"></p>
                   </span>
                 </div>
               </div>
 
               <div class="form-group">
-                  <input type="submit" [disabled]="!funcionarioForm.valid" value="Cadastrar" class="btn btn-primary" id="cadastroFuncionario">&nbsp;
-                  <a class="btn btn-info" [routerLink]="['/funcionarios/listar-todos']">Voltar</a>
+                  <input type="submit" [disabled]="!clienteForm.valid" value="Editar" class="btn btn-primary">&nbsp;
+                  <a class="btn btn-info" [routerLink]="['/clientes/listar-todos']">Voltar</a>
               </div>
           </form>
       </div>

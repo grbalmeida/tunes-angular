@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'funcionarios',
     loadChildren: () => import('./funcionario/funcionario.module').then(m => m.FuncionarioModule)
   },
+  {
+    path: 'clientes',
+    loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule)
+  },
 
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },

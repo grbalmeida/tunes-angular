@@ -8,3 +8,4 @@ export const GENEROS_LISTAR_TODOS = '/generos/listar-todos';
 export const PLAYLISTS_LISTAR_TODOS = '/playlists/listar-todos';
 export const TIPOS_DE_MIDIA_LISTAR_TODOS = '/tipos-de-midia/listar-todos';
 export const FUNCIONARIOS_LISTAR_TODOS = '/funcionarios/listar-todos';
+export const CLIENTES_LISTAR_TODOS = '/clientes/listar-todos';

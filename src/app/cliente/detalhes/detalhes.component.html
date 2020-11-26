@@ -1,0 +1,45 @@
+<div class="container main-container">
+  <h4>{{ cliente.primeiroNome + ' ' + cliente.sobrenome }} </h4>
+  <br>
+  <h5>Você tem certeza disso?</h5>
+
+  <div class="row">
+      <div class="col-md-6">
+          <dl>
+            <dt>Nome Completo</dt>
+            <dd>{{ cliente.primeiroNome + ' ' + cliente.sobrenome }}</dd>
+            <dt>Empresa</dt>
+            <dd>{{ cliente.empresa }}</dd>
+            <dt>Suporte</dt>
+            <dd>{{ cliente.suporte?.primeiroNome }}</dd>
+          </dl>
+
+          <h6>Endereço</h6>
+
+          <dl>
+            <dt>Endereço</dt>
+            <dd>{{ cliente.endereco }}</dd>
+            <dt>Cidade</dt>
+            <dd>{{ cliente.cidade }}</dd>
+            <dt>Estado</dt>
+            <dd>{{ cliente.estado }}</dd>
+            <dt>País</dt>
+            <dd>{{ cliente.pais }}</dd>
+            <dt>CEP</dt>
+            <dd>{{ cliente.cep }}</dd>
+            <dt>Fone</dt>
+            <dd>{{ cliente.fone }}</dd>
+            <dt>Fax</dt>
+            <dd>{{ cliente.fax }}</dd>
+            <dt>Email</dt>
+            <dd>{{ cliente.email }}</dd>
+          </dl>
+
+          <div>
+            <a class="btn btn-warning" [routerLink]="['/clientes/editar', cliente.clienteId]">Editar</a>&nbsp;
+            <a class="btn btn-info" [routerLink]="['/clientes/listar-todos']">Voltar</a>
+          </div>
+      </div>
+  </div>
+
+</div>

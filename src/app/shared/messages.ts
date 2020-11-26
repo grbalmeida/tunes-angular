@@ -35,5 +35,9 @@ export const FUNCIONARIO_EDITADO_SUCESSO = 'Funcionário editado com sucesso!';
 export const FUNCIONARIO_EXCLUIDO_SUCESSO = 'Funcionário excluído com sucesso!';
 export const FUNCIONARIO_CADASTRADO_SUCESSO = 'Funcionário cadastrado com sucesso!';
 
+export const CLIENTE_EDITADO_SUCESSO = 'Cliente editado com sucesso!';
+export const CLIENTE_EXCLUIDO_SUCESSO = 'Cliente excluído com sucesso!';
+export const CLIENTE_CADASTRADO_SUCESSO = 'Cliente cadastrado com sucesso!';
+
 export const REGISTRO_REALIZADO_SUCESSO = 'Registro realizado com sucesso!';
 export const LOGIN_REALIZADO_SUCESSO = 'Login realizado com sucesso!';
