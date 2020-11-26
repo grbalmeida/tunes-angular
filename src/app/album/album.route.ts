@@ -29,7 +29,7 @@ const albumRouterConfig: Routes = [
           }
         ],
         resolve: {
-          albuns: ArtistasResolve
+          artistas: ArtistasResolve
         }
       }
     ]
