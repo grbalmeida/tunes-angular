@@ -1,0 +1,33 @@
+<div class="container main-container">
+
+  <div class="row">
+    <div class="col-md-6">
+      <dl>
+        <dt>
+          Cliente
+        </dt>
+        <dd>
+          {{ notaFiscal.cliente.primeiroNome + ' ' + notaFiscal.cliente.sobrenome }}
+        </dd>
+        <dt>
+          Data
+        </dt>
+        <dd>
+          {{ notaFiscal.dataNotaFiscal | date:'dd/MM/yyyy' }}
+        </dd>
+        <dt>
+          Total
+        </dt>
+        <dd>
+          {{ notaFiscal.total }}
+        </dd>
+      </dl>
+
+      <div>
+        <a class="btn btn-warning" [routerLink]="['/notas-fiscais/editar', notaFiscal.notaFiscalId]">Editar</a>&nbsp;
+        <a class="btn btn-info" [routerLink]="['/notas-fiscais/listar-todos']">Voltar</a>
+      </div>
+    </div>
+  </div>
+
+</div>

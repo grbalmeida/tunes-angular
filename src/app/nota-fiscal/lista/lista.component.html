@@ -1,0 +1,50 @@
+<div class="container main-container">
+
+  <h1>Notas Fiscais</h1>
+  <hr>
+
+  <p>
+      <a class="btn btn-info" [routerLink]="['/notas-fiscais/adicionar-novo']">Nova Nota Fiscal</a>
+  </p>
+
+  <table class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                Cliente
+              </th>
+              <th>
+                Total
+              </th>
+              <th>
+                Data
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let notaFiscal of notasFiscais">
+              <td>
+                {{ notaFiscal.cliente?.primeiroNome }}
+              </td>
+              <td>
+                {{ notaFiscal.total }}
+              </td>
+              <td>
+                {{ notaFiscal.dataNotaFiscal | date:'dd/MM/yyyy' }}
+              </td>
+              <td class="text-right">
+                <a class="btn btn-warning" [routerLink]="['/notas-fiscais/detalhes', notaFiscal.notaFiscalId]">
+                  <span class="fa fa-search"></span>
+                </a>&nbsp;
+                <a class="btn btn-info" [routerLink]="['/notas-fiscais/editar', notaFiscal.notaFiscalId]">
+                  <span class="fa fa-pencil-alt"></span>
+                </a>&nbsp;
+                <a class="btn btn-danger" [routerLink]="['/notas-fiscais/excluir', notaFiscal.notaFiscalId]">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

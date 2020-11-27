@@ -44,6 +44,10 @@ const routes: Routes = [
     path: 'clientes',
     loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule)
   },
+  {
+    path: 'notas-fiscais',
+    loadChildren: () => import('./nota-fiscal/nota-fiscal.module').then(m => m.NotaFiscalModule)
+  },
 
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },

@@ -39,5 +39,9 @@ export const CLIENTE_EDITADO_SUCESSO = 'Cliente editado com sucesso!';
 export const CLIENTE_EXCLUIDO_SUCESSO = 'Cliente excluído com sucesso!';
 export const CLIENTE_CADASTRADO_SUCESSO = 'Cliente cadastrado com sucesso!';
 
+export const NOTA_FISCAL_EDITADA_SUCESSO = 'Nota Fiscal editada com sucesso!';
+export const NOTA_FISCAL_EXCLUIDA_SUCESSO = 'Nota Fiscal excluída com sucesso!';
+export const NOTA_FISCAL_CADASTRADA_SUCESSO = 'Nota Fiscal cadastrada com sucesso!';
+
 export const REGISTRO_REALIZADO_SUCESSO = 'Registro realizado com sucesso!';
 export const LOGIN_REALIZADO_SUCESSO = 'Login realizado com sucesso!';
