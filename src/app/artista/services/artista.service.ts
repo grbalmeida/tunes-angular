@@ -21,7 +21,7 @@ export class ArtistaService extends BaseService {
 
   filtro(filtro: ArtistaFiltro): Observable<Artista[]> {
     const params = {
-      nome: filtro.nome
+      nome: filtro.nome ?? ''
     }
 
     return this.http
