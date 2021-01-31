@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { Genero } from '../models/genero';
+import { GeneroFiltro } from '../models/generoFiltro';
 
 @Injectable()
 export class GeneroService extends BaseService {
@@ -15,6 +16,20 @@ export class GeneroService extends BaseService {
   obterTodos(): Observable<Genero[]> {
     return this.http
       .get<Genero[]>(this.UrlServiceV1 + 'generos', super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError));
+  }
+
+  filtro(filtro: GeneroFiltro): Observable<Genero[]> {
+    const params = {
+      nome: filtro.nome ?? ''
+    }
+
+    return this.http
+      .get<Genero[]>(this.UrlServiceV2 + 'generos',
+      {
+        ...super.ObterAuthHeaderJson(),
+        params
+      })
       .pipe(catchError(super.serviceError));
   }
 
