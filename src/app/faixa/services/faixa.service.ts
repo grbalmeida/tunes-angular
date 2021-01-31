@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { Faixa } from '../models/faixa';
+import { FaixaFiltro } from '../models/faixaFiltro';
 
 @Injectable()
 export class FaixaService extends BaseService {
@@ -16,6 +17,26 @@ export class FaixaService extends BaseService {
     return this.http
       .get<Faixa[]>(this.UrlServiceV1 + 'faixas', super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError));
+  }
+
+  filtro(filtro: FaixaFiltro): Observable<Faixa[]> {
+    const params = new HttpParams({
+      fromObject: {
+        nome: filtro.nome ?? '',
+        compositor: filtro.compositor ?? '',
+        album: filtro.album ?? '',
+        tipoDeMidiaId: filtro.tipoDeMidiaId ? filtro.tipoDeMidiaId.toString() : '',
+        generoId: filtro.generoId ? filtro.generoId.toString() : ''
+      }
+    });
+
+    return this.http
+      .get<Faixa[]>(this.UrlServiceV2 + 'faixas',
+      {
+        ...super.ObterAuthHeaderJson(),
+        params
+      })
+      .pipe(catchError(super.serviceError)) as Observable<Faixa[]>;
   }
 
   obterPorId(id: number): Observable<Faixa> {
