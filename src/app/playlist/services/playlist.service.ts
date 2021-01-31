@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { Playlist } from '../models/playlist';
+import { PlaylistFiltro } from '../models/playlistFiltro';
 
 @Injectable()
 export class PlaylistService extends BaseService {
@@ -15,6 +16,20 @@ export class PlaylistService extends BaseService {
   obterTodos(): Observable<Playlist[]> {
     return this.http
       .get<Playlist[]>(this.UrlServiceV1 + 'playlists', super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError));
+  }
+
+  filtro(filtro: PlaylistFiltro): Observable<Playlist[]> {
+    const params = {
+      nome: filtro.nome ?? ''
+    }
+
+    return this.http
+      .get<Playlist[]>(this.UrlServiceV2 + 'playlists',
+      {
+        ...super.ObterAuthHeaderJson(),
+        params
+      })
       .pipe(catchError(super.serviceError));
   }
 
