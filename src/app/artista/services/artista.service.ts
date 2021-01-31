@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { Artista } from '../models/artista';
+import { ArtistaFiltro } from '../models/artistaFiltro';
 
 @Injectable()
 export class ArtistaService extends BaseService {
@@ -15,6 +16,20 @@ export class ArtistaService extends BaseService {
   obterTodos(): Observable<Artista[]> {
     return this.http
       .get<Artista[]>(this.UrlServiceV1 + 'artistas', super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError));
+  }
+
+  filtro(filtro: ArtistaFiltro): Observable<Artista[]> {
+    const params = {
+      nome: filtro.nome
+    }
+
+    return this.http
+      .get<Artista[]>(this.UrlServiceV2 + 'artistas',
+      {
+        ...super.ObterAuthHeaderJson(),
+        params
+      })
       .pipe(catchError(super.serviceError));
   }
 

@@ -4,35 +4,63 @@
   <hr>
 
   <p>
-      <a class="btn btn-info" [routerLink]="['/artistas/adicionar-novo']">Novo Artista</a>
+    <a class="btn btn-info" [routerLink]="['/artistas/adicionar-novo']">Novo Artista</a>
   </p>
 
+  <div>
+    <form [formGroup]="artistaFiltro">
+      <div class="form-group">
+        <div class="row ml-1">
+          <input
+            class="form-control mr-2"
+            id="nome"
+            type="text"
+            placeholder="Nome"
+            formControlName="nome"
+          />
+          <input
+            type="submit"
+            class="btn btn-success mr-2"
+            value="Filtrar"
+            (click)="filtrar()"
+          />
+          <input
+            type="submit"
+            class="btn btn-primary"
+            value="Limpar filtro"
+            (click)="limparFiltro()"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+
   <table class="table table-hover">
-      <thead class="thead-dark">
-          <tr>
-              <th>
-                  Nome
-              </th>
-              <th></th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let artista of artistas">
-              <td>
-                  {{ artista.nome }}
-              </td>
-              <td class="text-right">
-                <a class="btn btn-warning" [routerLink]="['/artistas/detalhes', artista.artistaId]">
-                  <span class="fa fa-search"></span>
-                </a>&nbsp;
-                <a class="btn btn-info" [routerLink]="['/artistas/editar', artista.artistaId]">
-                  <span class="fa fa-pencil-alt"></span>
-                </a>&nbsp;
-                <a class="btn btn-danger" [routerLink]="['/artistas/excluir', artista.artistaId]">
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-          </tr>
-      </tbody>
+    <thead class="thead-dark">
+      <tr>
+        <th>
+          Nome
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let artista of artistas">
+          <td>
+            {{ artista.nome }}
+          </td>
+          <td class="text-right">
+            <a class="btn btn-warning" [routerLink]="['/artistas/detalhes', artista.artistaId]">
+              <span class="fa fa-search"></span>
+            </a>&nbsp;
+            <a class="btn btn-info" [routerLink]="['/artistas/editar', artista.artistaId]">
+              <span class="fa fa-pencil-alt"></span>
+            </a>&nbsp;
+            <a class="btn btn-danger" [routerLink]="['/artistas/excluir', artista.artistaId]">
+              <span class="fa fa-trash"></span>
+            </a>
+          </td>
+        </tr>
+    </tbody>
   </table>
 </div>
