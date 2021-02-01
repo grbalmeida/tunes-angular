@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { Album } from '../models/album';
-import { AlbumFiltro } from '../models/albumFiltro';
+import { AlbumFiltro } from '../models/album-filtro';
 
 @Injectable()
 export class AlbumService extends BaseService {

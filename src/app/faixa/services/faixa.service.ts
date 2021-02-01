@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { Faixa } from '../models/faixa';
-import { FaixaFiltro } from '../models/faixaFiltro';
+import { FaixaFiltro } from '../models/faixa-filtro';
 
 @Injectable()
 export class FaixaService extends BaseService {

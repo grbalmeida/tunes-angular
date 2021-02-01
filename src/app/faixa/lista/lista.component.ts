@@ -6,7 +6,7 @@ import { GeneroService } from 'src/app/genero/services/genero.service';
 import { TipoMidia } from 'src/app/tipos-de-midia/models/tipo-midia';
 import { TipoMidiaService } from 'src/app/tipos-de-midia/services/tipo-midia.service';
 import { Faixa } from '../models/faixa';
-import { FaixaFiltro } from '../models/faixaFiltro';
+import { FaixaFiltro } from '../models/faixa-filtro';
 import { FaixaService } from '../services/faixa.service';
 @Component({
   selector: 'app-lista',

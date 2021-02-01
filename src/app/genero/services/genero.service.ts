@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { Genero } from '../models/genero';
-import { GeneroFiltro } from '../models/generoFiltro';
+import { GeneroFiltro } from '../models/genero-filtro';
 
 @Injectable()
 export class GeneroService extends BaseService {

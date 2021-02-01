@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { TipoMidia } from '../models/tipo-midia';
+import { TipoMidiaFiltro } from '../models/tipo-midia-filtro';
 
 @Injectable()
 export class TipoMidiaService extends BaseService {
@@ -15,6 +16,20 @@ export class TipoMidiaService extends BaseService {
   obterTodos(): Observable<TipoMidia[]> {
     return this.http
       .get<TipoMidia[]>(this.UrlServiceV1 + 'tipos-de-midia', super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError));
+  }
+
+  filtro(filtro: TipoMidiaFiltro): Observable<TipoMidia[]> {
+    const params = {
+      nome: filtro.nome ?? ''
+    }
+
+    return this.http
+      .get<TipoMidia[]>(this.UrlServiceV2 + 'tipos-de-midia',
+      {
+        ...super.ObterAuthHeaderJson(),
+        params
+      })
       .pipe(catchError(super.serviceError));
   }
 

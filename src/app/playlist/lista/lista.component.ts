@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Playlist } from '../models/playlist';
-import { PlaylistFiltro } from '../models/playlistFiltro';
+import { PlaylistFiltro } from '../models/playlist-filtro';
 import { PlaylistService } from '../services/playlist.service';
 @Component({
   selector: 'app-lista',

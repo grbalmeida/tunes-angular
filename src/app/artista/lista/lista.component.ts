@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Artista } from '../models/artista';
-import { ArtistaFiltro } from '../models/artistaFiltro';
+import { ArtistaFiltro } from '../models/artista-filtro';
 import { ArtistaService } from '../services/artista.service';
 @Component({
   selector: 'app-lista',

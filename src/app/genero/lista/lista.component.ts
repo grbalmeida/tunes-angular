@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Genero } from '../models/genero';
-import { GeneroFiltro } from '../models/generoFiltro';
+import { GeneroFiltro } from '../models/genero-filtro';
 import { GeneroService } from '../services/genero.service';
 @Component({
   selector: 'app-lista',

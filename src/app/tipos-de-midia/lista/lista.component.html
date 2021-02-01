@@ -7,6 +7,34 @@
       <a class="btn btn-info" [routerLink]="['/tipos-de-midia/adicionar-novo']">Novo Tipo de Mídia</a>
   </p>
 
+  <div>
+    <form [formGroup]="tipoMidiaFiltro">
+      <div class="form-group">
+        <div class="row ml-1">
+          <input
+            class="form-control mr-2"
+            id="nome"
+            type="text"
+            placeholder="Nome"
+            formControlName="nome"
+          />
+          <input
+            type="submit"
+            class="btn btn-success mr-2"
+            value="Filtrar"
+            (click)="filtrar()"
+          />
+          <input
+            type="submit"
+            class="btn btn-primary"
+            value="Limpar filtro"
+            (click)="limparFiltro()"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+
   <table class="table table-hover">
       <thead class="thead-dark">
           <tr>

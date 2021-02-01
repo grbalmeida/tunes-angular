@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from 'src/app/services/base.service';
 import { Playlist } from '../models/playlist';
-import { PlaylistFiltro } from '../models/playlistFiltro';
+import { PlaylistFiltro } from '../models/playlist-filtro';
 
 @Injectable()
 export class PlaylistService extends BaseService {
