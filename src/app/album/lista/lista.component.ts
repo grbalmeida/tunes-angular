@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DownloadService } from 'src/app/services/download.service';
 import { Album } from '../models/album';
 import { AlbumFiltro } from '../models/album-filtro';
 import { AlbumService } from '../services/album.service';
@@ -16,6 +17,7 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private albumService: AlbumService,
+    private downloadService: DownloadService,
     private loader: NgxSpinnerService,
     private fb: FormBuilder
   ) { }
@@ -49,6 +51,19 @@ export class ListaComponent implements OnInit {
         error => this.errorMessage,
         () => this.loader.hide()
       );
+  }
+
+  excel(): void {
+    const albumFiltro = this.albumFiltro.value as AlbumFiltro;
+
+    this.loader.show();
+
+    this.albumService.excel(albumFiltro)
+      .subscribe(
+        excel => this.downloadService.download(excel, 'albuns.xlsx'),
+        error => this.errorMessage,
+        () => this.loader.hide()
+      )
   }
 
   limparFiltro(): void {

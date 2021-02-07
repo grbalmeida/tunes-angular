@@ -32,6 +32,22 @@ export class AlbumService extends BaseService {
       .pipe(catchError(super.serviceError));
   }
 
+  excel(filtro: AlbumFiltro): Observable<Blob> {
+    const params = {
+      titulo: filtro.titulo ?? '',
+      artista: filtro.artista ?? ''
+    }
+
+    return this.http
+      .get<Blob>(this.UrlServiceV2 + 'albuns/excel',
+      {
+        ...super.ObterAuthHeaderJson(),
+        responseType: 'blob' as 'json',
+        params
+      })
+      .pipe(catchError(super.serviceError)) as Observable<Blob>;
+  }
+
   obterPorId(id: number): Observable<Album> {
     return this.http
       .get<Album>(this.UrlServiceV1 + 'albuns/' + id, super.ObterAuthHeaderJson())
