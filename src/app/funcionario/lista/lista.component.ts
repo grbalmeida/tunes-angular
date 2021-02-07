@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DownloadService } from 'src/app/services/download.service';
 import { Funcionario } from '../models/funcionario';
 import { FuncionarioFiltro } from '../models/funcionario-filtro';
 import { FuncionarioService } from '../services/funcionario.service';
+
 @Component({
   selector: 'app-lista',
   templateUrl: './lista.component.html'
@@ -17,6 +19,7 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private funcionarioService: FuncionarioService,
+    private downloadService: DownloadService,
     private loader: NgxSpinnerService,
     private fb: FormBuilder
   ) { }
@@ -72,6 +75,19 @@ export class ListaComponent implements OnInit {
         error => this.errorMessage,
         () => this.loader.hide()
       );
+  }
+
+  excel(): void {
+    const funcionarioFiltro = this.funcionarioFiltro.value as FuncionarioFiltro;
+
+    this.loader.show();
+
+    this.funcionarioService.excel(funcionarioFiltro)
+      .subscribe(
+        excel => this.downloadService.download(excel, 'funcionarios.xlsx'),
+        error => this.errorMessage,
+        () => this.loader.hide()
+      )
   }
 
   limparFiltro(): void {

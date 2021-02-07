@@ -61,6 +61,36 @@ export class FuncionarioService extends BaseService {
       .pipe(catchError(super.serviceError)) as Observable<Funcionario[]>;
   }
 
+  excel(filtro: FuncionarioFiltro): Observable<Blob> {
+    const params = new HttpParams({
+      fromObject: {
+        primeiroNome: filtro.primeiroNome ?? '',
+        sobrenome: filtro.sobrenome ?? '',
+        titulo: filtro.titulo ?? '',
+        dataNascimento: filtro.dataNascimento ? filtro.dataNascimento.toString() : '',
+        dataAdmissao: filtro.dataAdmissao ? filtro.dataAdmissao.toString() : '',
+        endereco: filtro.endereco ?? '',
+        cidade: filtro.cidade ?? '',
+        estado: filtro.estado ?? '',
+        pais: filtro.pais ?? '',
+        cep: filtro.cep ?? '',
+        fone: filtro.fone ?? '',
+        fax: filtro.fax ?? '',
+        email: filtro.email ?? '',
+        gerenteId: filtro.gerenteId ? filtro.gerenteId.toString() : ''
+      }
+    });
+
+    return this.http
+      .get<Blob>(this.UrlServiceV2 + 'funcionarios/excel',
+      {
+        ...super.ObterAuthHeaderJson(),
+        responseType: 'blob' as 'json',
+        params
+      })
+      .pipe(catchError(super.serviceError)) as Observable<Blob>;
+  }
+
   obterPorId(id: number): Observable<Funcionario> {
     return this.http
       .get<Funcionario>(this.UrlServiceV1 + 'funcionarios/' + id, super.ObterAuthHeaderJson())
