@@ -55,6 +55,8 @@ export class ListaComponent implements OnInit {
   excel(): void {
     const artistaFiltro = this.artistaFiltro.value as ArtistaFiltro;
 
+    this.loader.show();
+
     this.artistaService.excel(artistaFiltro)
       .subscribe(
         excel => this.downloadService.download(excel, 'artistas.xlsx'),

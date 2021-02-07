@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DownloadService } from 'src/app/services/download.service';
 import { Playlist } from '../models/playlist';
 import { PlaylistFiltro } from '../models/playlist-filtro';
 import { PlaylistService } from '../services/playlist.service';
@@ -16,6 +17,7 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private playlistService: PlaylistService,
+    private downloadService: DownloadService,
     private loader: NgxSpinnerService,
     private fb: FormBuilder
   ) { }
@@ -48,6 +50,19 @@ export class ListaComponent implements OnInit {
         error => this.errorMessage,
         () => this.loader.hide()
       );
+  }
+
+  excel(): void {
+    const playlistFiltro = this.playlistFiltro.value as PlaylistFiltro;
+
+    this.loader.show();
+
+    this.playlistService.excel(playlistFiltro)
+      .subscribe(
+        excel => this.downloadService.download(excel, 'playlists.xlsx'),
+        error => this.errorMessage,
+        () => this.loader.hide()
+      )
   }
 
   limparFiltro(): void {
