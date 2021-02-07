@@ -7,6 +7,97 @@
     <a class="btn btn-info" [routerLink]="['/clientes/adicionar-novo']">Novo Cliente</a>
   </p>
 
+  <div>
+    <form [formGroup]="clienteFiltro">
+      <div class="form-group">
+        <div class="row ml-1">
+          <input
+            class="form-control mr-2 mb-2"
+            id="primeiroNome"
+            type="text"
+            placeholder="Primeiro nome"
+            formControlName="primeiroNome"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="sobrenome"
+            type="text"
+            placeholder="Sobrenome"
+            formControlName="sobrenome"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="empresa"
+            type="text"
+            placeholder="Empresa"
+            formControlName="empresa"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="cidade"
+            type="text"
+            placeholder="Cidade"
+            formControlName="cidade"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="estado"
+            type="text"
+            placeholder="Estado"
+            formControlName="estado"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="pais"
+            type="text"
+            placeholder="País"
+            formControlName="pais"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="cep"
+            type="text"
+            placeholder="CEP"
+            formControlName="cep"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="fone"
+            type="text"
+            placeholder="Fone"
+            formControlName="fone"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="fax"
+            type="text"
+            placeholder="Fax"
+            formControlName="fax"
+          />
+          <input
+            class="form-control mr-2 mb-2"
+            id="email"
+            type="text"
+            placeholder="Email"
+            formControlName="email"
+          />
+          <input
+            type="submit"
+            class="btn btn-success mr-2"
+            value="Filtrar"
+            (click)="filtrar()"
+          />
+          <input
+            type="submit"
+            class="btn btn-primary"
+            value="Limpar filtro"
+            (click)="limparFiltro()"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+
   <table class="table table-hover">
       <thead class="thead-dark">
           <tr>
