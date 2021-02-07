@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Genero } from 'src/app/genero/models/genero';
 import { GeneroService } from 'src/app/genero/services/genero.service';
+import { DownloadService } from 'src/app/services/download.service';
 import { TipoMidia } from 'src/app/tipos-de-midia/models/tipo-midia';
 import { TipoMidiaService } from 'src/app/tipos-de-midia/services/tipo-midia.service';
 import { Faixa } from '../models/faixa';
@@ -24,6 +25,7 @@ export class ListaComponent implements OnInit {
     private faixaService: FaixaService,
     private tipoDeMidiaService: TipoMidiaService,
     private generoService: GeneroService,
+    private downloadService: DownloadService,
     private loader: NgxSpinnerService,
     private fb: FormBuilder
   ) { }
@@ -74,6 +76,19 @@ export class ListaComponent implements OnInit {
     this.generoService.obterTodos()
       .subscribe(
         generos => this.generos = generos,
+        error => this.errorMessage,
+        () => this.loader.hide()
+      )
+  }
+
+  excel(): void {
+    const faixaFiltro = this.faixaFiltro.value as FaixaFiltro;
+
+    this.loader.show();
+
+    this.faixaService.excel(faixaFiltro)
+      .subscribe(
+        excel => this.downloadService.download(excel, 'faixas.xlsx'),
         error => this.errorMessage,
         () => this.loader.hide()
       )

@@ -37,6 +37,27 @@ export class FaixaService extends BaseService {
       .pipe(catchError(super.serviceError)) as Observable<Faixa[]>;
   }
 
+  excel(filtro: FaixaFiltro): Observable<Blob> {
+    const params = new HttpParams({
+      fromObject: {
+        nome: filtro.nome ?? '',
+        compositor: filtro.compositor ?? '',
+        album: filtro.album ?? '',
+        tipoDeMidiaId: filtro.tipoDeMidiaId ? filtro.tipoDeMidiaId.toString() : '',
+        generoId: filtro.generoId ? filtro.generoId.toString() : ''
+      }
+    });
+
+    return this.http
+      .get<Blob>(this.UrlServiceV2 + 'faixas/excel',
+      {
+        ...super.ObterAuthHeaderJson(),
+        responseType: 'blob' as 'json',
+        params
+      })
+      .pipe(catchError(super.serviceError)) as Observable<Blob>;
+  }
+
   obterPorId(id: number): Observable<Faixa> {
     return this.http
       .get<Faixa>(this.UrlServiceV1 + 'faixas/' + id, super.ObterAuthHeaderJson())
