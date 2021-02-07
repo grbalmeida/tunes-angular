@@ -14,9 +14,7 @@ export class GeneroService extends BaseService {
   }
 
   obterTodos(): Observable<Genero[]> {
-    return this.http
-      .get<Genero[]>(this.UrlServiceV1 + 'generos', super.ObterAuthHeaderJson())
-      .pipe(catchError(super.serviceError));
+    return this.filtro({ nome: '' });
   }
 
   filtro(filtro: GeneroFiltro): Observable<Genero[]> {

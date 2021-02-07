@@ -14,9 +14,7 @@ export class AlbumService extends BaseService {
   }
 
   obterTodos(): Observable<Album[]> {
-    return this.http
-      .get<Album[]>(this.UrlServiceV1 + 'albuns', super.ObterAuthHeaderJson())
-      .pipe(catchError(super.serviceError));
+    return this.filtro({ artista: '', titulo: '' });
   }
 
   filtro(filtro: AlbumFiltro): Observable<Album[]> {

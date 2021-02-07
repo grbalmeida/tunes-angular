@@ -14,9 +14,22 @@ export class FuncionarioService extends BaseService {
   }
 
   obterTodos(): Observable<Funcionario[]> {
-    return this.http
-      .get<Funcionario[]>(this.UrlServiceV1 + 'funcionarios', super.ObterAuthHeaderJson())
-      .pipe(catchError(super.serviceError));
+    return this.filtro({
+      cep: '',
+      cidade: '',
+      dataAdmissao: null,
+      dataNascimento: null,
+      email: '',
+      endereco: '',
+      estado: '',
+      fax: '',
+      fone: '',
+      gerenteId: 0,
+      pais: '',
+      primeiroNome: '',
+      sobrenome: '',
+      titulo: ''
+    });
   }
 
   filtro(filtro: FuncionarioFiltro): Observable<Funcionario[]> {

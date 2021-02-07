@@ -14,9 +14,7 @@ export class TipoMidiaService extends BaseService {
   }
 
   obterTodos(): Observable<TipoMidia[]> {
-    return this.http
-      .get<TipoMidia[]>(this.UrlServiceV1 + 'tipos-de-midia', super.ObterAuthHeaderJson())
-      .pipe(catchError(super.serviceError));
+    return this.filtro({ nome: '' });
   }
 
   filtro(filtro: TipoMidiaFiltro): Observable<TipoMidia[]> {

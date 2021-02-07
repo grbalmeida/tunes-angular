@@ -14,9 +14,7 @@ export class FaixaService extends BaseService {
   }
 
   obterTodos(): Observable<Faixa[]> {
-    return this.http
-      .get<Faixa[]>(this.UrlServiceV1 + 'faixas', super.ObterAuthHeaderJson())
-      .pipe(catchError(super.serviceError));
+    return this.filtro({ album: '', compositor: '', generoId: 0, nome: '', tipoDeMidiaId: 0 });
   }
 
   filtro(filtro: FaixaFiltro): Observable<Faixa[]> {

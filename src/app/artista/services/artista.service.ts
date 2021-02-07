@@ -14,9 +14,7 @@ export class ArtistaService extends BaseService {
   }
 
   obterTodos(): Observable<Artista[]> {
-    return this.http
-      .get<Artista[]>(this.UrlServiceV1 + 'artistas', super.ObterAuthHeaderJson())
-      .pipe(catchError(super.serviceError));
+    return this.filtro({ nome: '' });
   }
 
   filtro(filtro: ArtistaFiltro): Observable<Artista[]> {

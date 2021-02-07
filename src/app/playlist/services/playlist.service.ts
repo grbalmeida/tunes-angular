@@ -14,9 +14,7 @@ export class PlaylistService extends BaseService {
   }
 
   obterTodos(): Observable<Playlist[]> {
-    return this.http
-      .get<Playlist[]>(this.UrlServiceV1 + 'playlists', super.ObterAuthHeaderJson())
-      .pipe(catchError(super.serviceError));
+    return this.filtro({ nome: '' });
   }
 
   filtro(filtro: PlaylistFiltro): Observable<Playlist[]> {
