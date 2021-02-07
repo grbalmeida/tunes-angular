@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DownloadService } from 'src/app/services/download.service';
 import { Genero } from '../models/genero';
 import { GeneroFiltro } from '../models/genero-filtro';
 import { GeneroService } from '../services/genero.service';
@@ -16,6 +17,7 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private generoService: GeneroService,
+    private downloadService: DownloadService,
     private loader: NgxSpinnerService,
     private fb: FormBuilder
   ) { }
@@ -48,6 +50,17 @@ export class ListaComponent implements OnInit {
         error => this.errorMessage,
         () => this.loader.hide()
       );
+  }
+
+  excel(): void {
+    const generoFiltro = this.generoFiltro.value as GeneroFiltro;
+
+    this.generoService.excel(generoFiltro)
+      .subscribe(
+        excel => this.downloadService.download(excel, 'generos.xlsx'),
+        error => this.errorMessage,
+        () => this.loader.hide()
+      )
   }
 
   limparFiltro(): void {

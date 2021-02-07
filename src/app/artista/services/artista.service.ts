@@ -37,7 +37,7 @@ export class ArtistaService extends BaseService {
     };
 
     return this.http
-      .get<Artista[]>(this.UrlServiceV2 + 'artistas/excel',
+      .get<Blob>(this.UrlServiceV2 + 'artistas/excel',
       {
         ...super.ObterAuthHeaderJson(),
         responseType: 'blob' as 'json',

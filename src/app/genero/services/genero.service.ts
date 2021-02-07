@@ -31,6 +31,21 @@ export class GeneroService extends BaseService {
       .pipe(catchError(super.serviceError));
   }
 
+  excel(filtro: GeneroFiltro): Observable<Blob> {
+    const params = {
+      nome: filtro.nome ?? ''
+    };
+
+    return this.http
+      .get<Blob>(this.UrlServiceV2 + 'generos/excel',
+      {
+        ...super.ObterAuthHeaderJson(),
+        responseType: 'blob' as 'json',
+        params
+      })
+      .pipe(catchError(super.serviceError)) as Observable<Blob>;
+  }
+
   obterPorId(id: number): Observable<Genero> {
     return this.http
       .get<Genero>(this.UrlServiceV1 + 'generos/' + id, super.ObterAuthHeaderJson())
