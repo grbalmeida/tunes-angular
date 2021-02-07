@@ -20,7 +20,7 @@ export class ArtistaService extends BaseService {
   filtro(filtro: ArtistaFiltro): Observable<Artista[]> {
     const params = {
       nome: filtro.nome ?? ''
-    }
+    };
 
     return this.http
       .get<Artista[]>(this.UrlServiceV2 + 'artistas',
@@ -29,6 +29,21 @@ export class ArtistaService extends BaseService {
         params
       })
       .pipe(catchError(super.serviceError));
+  }
+
+  excel(filtro: ArtistaFiltro): Observable<Blob> {
+    const params = {
+      nome: filtro.nome ?? ''
+    };
+
+    return this.http
+      .get<Artista[]>(this.UrlServiceV2 + 'artistas/excel',
+      {
+        ...super.ObterAuthHeaderJson(),
+        responseType: 'blob' as 'json',
+        params
+      })
+      .pipe(catchError(super.serviceError)) as Observable<Blob>;
   }
 
   obterPorId(id: number): Observable<Artista> {

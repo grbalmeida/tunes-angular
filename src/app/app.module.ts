@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { NavegacaoModule } from './navegacao/navegacao.module';
 import { ErrorInterceptor } from './services/error.handler.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { DownloadService } from './services/download.service';
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
@@ -31,7 +32,8 @@ export const httpInterceptorProviders = [
     NgxSpinnerModule
   ],
   providers: [
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    DownloadService
   ],
   bootstrap: [AppComponent]
 })
