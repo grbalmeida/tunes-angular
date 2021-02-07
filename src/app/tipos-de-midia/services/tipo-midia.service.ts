@@ -31,6 +31,21 @@ export class TipoMidiaService extends BaseService {
       .pipe(catchError(super.serviceError));
   }
 
+  excel(filtro: TipoMidiaFiltro): Observable<Blob> {
+    const params = {
+      nome: filtro.nome ?? ''
+    };
+
+    return this.http
+      .get<Blob>(this.UrlServiceV2 + 'tipos-de-midia/excel',
+      {
+        ...super.ObterAuthHeaderJson(),
+        responseType: 'blob' as 'json',
+        params
+      })
+      .pipe(catchError(super.serviceError)) as Observable<Blob>;
+  }
+
   obterPorId(id: number): Observable<TipoMidia> {
     return this.http
       .get<TipoMidia>(this.UrlServiceV1 + 'tipos-de-midia/' + id, super.ObterAuthHeaderJson())

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DownloadService } from 'src/app/services/download.service';
 import { TipoMidia } from '../models/tipo-midia';
 import { TipoMidiaFiltro } from '../models/tipo-midia-filtro';
 import { TipoMidiaService } from '../services/tipo-midia.service';
@@ -16,6 +17,7 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private tipoMidiaService: TipoMidiaService,
+    private downloadService: DownloadService,
     private loader: NgxSpinnerService,
     private fb: FormBuilder
   ) { }
@@ -48,6 +50,19 @@ export class ListaComponent implements OnInit {
         error => this.errorMessage,
         () => this.loader.hide()
       );
+  }
+
+  excel(): void {
+    const tipoMidiaFiltro = this.tipoMidiaFiltro.value as TipoMidiaFiltro;
+
+    this.loader.show();
+
+    this.tipoMidiaService.excel(tipoMidiaFiltro)
+      .subscribe(
+        excel => this.downloadService.download(excel, 'tipos-de-midia.xlsx'),
+        error => this.errorMessage,
+        () => this.loader.hide()
+      )
   }
 
   limparFiltro(): void {
