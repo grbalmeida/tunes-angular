@@ -55,6 +55,33 @@ export class ClienteService extends BaseService {
       .pipe(catchError(super.serviceError)) as Observable<Cliente[]>;
   }
 
+  excel(filtro: ClienteFiltro): Observable<Blob> {
+    const params = new HttpParams({
+      fromObject: {
+        primeiroNome: filtro.primeiroNome ?? '',
+        sobrenome: filtro.sobrenome ?? '',
+        empresa: filtro.empresa ?? '',
+        endereco: filtro.endereco ?? '',
+        cidade: filtro.cidade ?? '',
+        estado: filtro.estado ?? '',
+        pais: filtro.pais ?? '',
+        cep: filtro.cep ?? '',
+        fone: filtro.fone ?? '',
+        fax: filtro.fax ?? '',
+        email: filtro.email ?? '',
+      }
+    });
+
+    return this.http
+      .get<Blob>(this.UrlServiceV2 + 'clientes/excel',
+      {
+        ...super.ObterAuthHeaderJson(),
+        responseType: 'blob' as 'json',
+        params
+      })
+      .pipe(catchError(super.serviceError)) as Observable<Blob>;
+  }
+
   obterPorId(id: number): Observable<Cliente> {
     return this.http
       .get<Cliente>(this.UrlServiceV1 + 'clientes/' + id, super.ObterAuthHeaderJson())
