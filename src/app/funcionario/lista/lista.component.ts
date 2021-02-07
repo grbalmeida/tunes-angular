@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Funcionario } from '../models/funcionario';
+import { FuncionarioFiltro } from '../models/funcionario-filtro';
 import { FuncionarioService } from '../services/funcionario.service';
 @Component({
   selector: 'app-lista',
@@ -9,18 +11,71 @@ import { FuncionarioService } from '../services/funcionario.service';
 export class ListaComponent implements OnInit {
 
   public funcionarios: Funcionario[];
+  gerentes: Funcionario[] = [];
+  funcionarioFiltro: FormGroup;
   errorMessage: string;
 
-  constructor(private funcionarioService: FuncionarioService, private loader: NgxSpinnerService) { }
+  constructor(
+    private funcionarioService: FuncionarioService,
+    private loader: NgxSpinnerService,
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.loader.show();
 
+    this.obterTodos();
+    this.preencherCombos();
+
+    this.funcionarioFiltro = this.fb.group({
+      primeiroNome: [''],
+      sobrenome: [''],
+      titulo: [''],
+      dataNascimento: [''],
+      dataAdmissao: [''],
+      endereco: [''],
+      cidade: [''],
+      estado: [''],
+      pais: [''],
+      cep: [''],
+      fone: [''],
+      fax: [''],
+      email: [''],
+      gerenteId: ['']
+    })
+  }
+
+  filtrar(): void {
+    const funcionarioFiltro = this.funcionarioFiltro.value as FuncionarioFiltro;
+
+    this.funcionarioService.filtro(funcionarioFiltro)
+      .subscribe(
+        funcionarios => this.funcionarios = funcionarios,
+        error => this.errorMessage,
+        () => this.loader.hide()
+      )
+  }
+
+  obterTodos(): void {
     this.funcionarioService.obterTodos()
       .subscribe(
         funcionarios => this.funcionarios = funcionarios,
         error => this.errorMessage,
         () => this.loader.hide()
       );
+  }
+
+  preencherCombos(): void {
+    this.funcionarioService.obterTodos()
+      .subscribe(
+        gerentes => this.gerentes = gerentes,
+        error => this.errorMessage,
+        () => this.loader.hide()
+      );
+  }
+
+  limparFiltro(): void {
+    this.funcionarioFiltro.reset();
+    this.obterTodos();
   }
 }
